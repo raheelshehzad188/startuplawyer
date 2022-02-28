@@ -45,6 +45,12 @@ $assets = base_url('assets/booking/');
 	    .providers .row{
 	        margin-top:20px;
 	    }
+	    .lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .availability_calendar_block > .flex-container {
+		    padding: 0;
+		    max-height: 400px;
+		    overflow-x: hidden;
+		    overflow-y: scroll;
+		}
 	</style>
 </head>
 <body>
@@ -313,8 +319,9 @@ header.header.sticky ul#menu-short > li > a {
 											        if($slots)
 											        {
 											            ?>
-											            	<div class="col-lg-4 col-md-4 col-sm-4 col-sm-4 flex-container">
-											            	    <?php
+											            	<div class="col-sm-4 flex-container calendar-slider-day">
+											            	<div class="flex-container">
+											            		    <?php
 											            	    foreach($slots as $sk=> $sv)
 											            {
 											                ?>
@@ -324,6 +331,7 @@ header.header.sticky ul#menu-short > li > a {
 											                <?php
 											            }
 											            ?>
+											            	</div>
 													
 												</div>
 											            <?php

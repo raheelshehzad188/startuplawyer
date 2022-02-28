@@ -1,0 +1,4 @@
+[26-Feb-2021 16:29:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home/startupl/public_html/dev/wp-content/themes/srtartuplawyer/index.php:1
+Stack trace:
+#0 {main}
+  thrown in /home/startupl/public_html/dev/wp-content/themes/srtartuplawyer/index.php on line 1

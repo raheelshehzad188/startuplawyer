@@ -98,10 +98,10 @@ if($ip_server == '::1')
 {
 	$db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => ' ',
-	'database' => 'startupl_ci',
+	'hostname' => DB_HOST,
+	'username' => DB_USER,
+	'password' => DB_PASSWORD,
+	'database' => DB_NAME,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

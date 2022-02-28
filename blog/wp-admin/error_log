@@ -1,0 +1,7 @@
+[03-Sep-2021 14:04:14 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 2935
+[03-Sep-2021 14:04:15 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 2935
+[03-Sep-2021 14:05:58 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 2935
+[03-Sep-2021 14:05:58 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 2935
+[03-Sep-2021 14:07:08 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 2935
+[03-Sep-2021 14:08:10 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 2935
+[03-Sep-2021 17:27:57 UTC] PHP Parse error:  syntax error, unexpected 'is_feature' (T_STRING), expecting ',' or ')' in /home/startupl/public_html/main/blog/wp-content/themes/srtartuplawyer/functions.php on line 15

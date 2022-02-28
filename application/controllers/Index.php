@@ -605,21 +605,21 @@ class Index extends CI_Controller {
         $output = file_get_contents($url);
 		    $modal->table = 'products';
 		        $modal->key = 'ID';
-		  //  $pro = json_decode($output, true);
-		    $pro = $modal->get(array('catID'=>1));
+		    $pro = json_decode($output, true);
+		  //  $pro = $modal->get(array('catID'=>1));
 		  //  var_dump($pro);
 		  //  die("PL");
 		    //apply filter here
 		    $arr = array();
-		    foreach($pro as $k=> $v)
+		    /*foreach($pro as $k=> $v)
 		    {
 		        $arr[] = $v['id'];
-		    }
-		    /*$arr = array();
+		    }*/
+		    $arr = array();
 		    foreach($pro as $k=> $v)
 		    {
 		        $arr[] = $v;
-		    }*/
+		    }
 		    $pro = $arr;
 		    $per_page = 3;
 		    $tot = count($arr)/$per_page;
