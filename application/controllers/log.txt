@@ -1,0 +1,26 @@
+PayHere Notify Received at 2021-01-02 13:35:32
+Parameters:
+{
+    "merchant_id": "1215144",
+    "order_id": "1144",
+    "payment_id": "320025111738",
+    "payhere_amount": "100.00",
+    "payhere_currency": "LKR",
+    "status_code": "2",
+    "md5sig": "22ED30A99E96AC38214BE918E929B6E3",
+    "custom_1": "1",
+    "custom_2": "2",
+    "status_message": "Successfully completed the payment.",
+    "method": "TEST",
+    "card_holder_name": "visa",
+    "card_no": "************1292",
+    "card_expiry": "0525",
+    "recurring": "1",
+    "message_type": "AUTHORIZATION_SUCCESS",
+    "item_recurrence": "1 MONTH",
+    "item_duration": "FOREVER",
+    "item_rec_status": "0",
+    "item_rec_date_next": "2021-01-25",
+    "item_rec_install_paid": "1",
+    "subscription_id": "420075036828"
+}

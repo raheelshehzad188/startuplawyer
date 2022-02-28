@@ -1,0 +1,195 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+body {
+    background: #f1f1f1;
+    color: #444;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    line-height: 1.4em;}
+td.product-date .profile-img img {
+    width: 60px;
+    border-radius: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.earning-tab .table thead th {
+    border-left: 1px solid #f8f8f8;
+}
+.check-img {
+    width: 140px;
+    margin: 0 auto;
+}
+.success_text {
+    margin: 22px auto 0;
+    font-size: 31px;
+    text-align: center;
+    margin-top: 25px;
+}
+.success-div {
+    background: #ffffffc7;
+    width: 49%;
+    padding: 37px;
+    margin: 0 auto;
+}
+span.status.status-processing{
+	color: black;
+    background-color: #c6e1c6;
+    padding: 5px;
+}
+span.status.status-on-hold{
+	color: black;
+    background-color: #f8dda7;
+    padding: 5px;
+}
+span.status.status-completed{
+	color: black;
+    background-color: #c8d7e1;
+    padding: 5px;
+}
+span.status.status-cancelled{
+	color: black;
+    background-color: #e5e5e5;
+    padding: 5px;
+}span.status.status-pending{
+	color: black;
+    background-color: #e5e5e5;
+    padding: 5px;
+}
+span.status.status-failed{
+	color: black;
+    background-color: #f8dda7;
+    padding: 5px;
+}
+span.status.status-Refunded{
+	color: black;
+    background-color: #e5e5e5;
+    padding: 5px;
+}
+.tab-pane .wp-tab-panel {
+    min-height: 42px;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0 .9em;
+    border: solid 1px #ddd;
+    border-radius: 4px;
+    background-color: #fdfdfd;
+}
+.tab-pane .wp-tab-panel ul {
+    margin-top: 1rem;
+    padding: 0 !important;  
+}
+.tab-pane .wp-tab-panel ul li input[type="checkbox"] {
+    border: 1px solid #7e8993;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    height: 1rem;
+    margin: -.25rem .25rem 0 0;
+    outline: 0;
+    padding: 0!important;
+    text-align: center;
+    vertical-align: middle;
+    width: 1rem;
+    min-width: 1rem;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    transition: .05s border-color ease-in-out;
+
+}
+
+
+
+
+
+
+
+
+
+
+table{
+    border: 1px solid #F1F1F1;
+    font-size:13px;
+}
+/* Dropdown Button */
+.dropbtn {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+a{
+    color:black;
+}
+a:hover{
+    color:black;
+}
+ #the-list td input[type=text]{
+    
+    width: 350px;
+    margin: 10px 100px;
+    height: 40px;
+    border-radius:5px;
+
+}
+.tablenav {
+    clear: both;
+    height: 30px;
+    margin: 6px 0 4px;
+    padding-top: 5px;
+    vertical-align: middle;
+}
+.tablenav .actions {
+    padding: 0 8px 0 0;
+}
+.alignleft {
+    float: left;
+}
+table.fixed {
+    table-layout: fixed;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}

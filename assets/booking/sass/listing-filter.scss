@@ -1,0 +1,228 @@
+
+.lawyer_block{
+    position:relative;
+    margin-bottom: 4rem;
+    
+    .lawyer_left{
+        display: inline-block;
+        max-width: 135px;
+        .avatar {
+            width: 120px;
+            height: 120px;
+            display: inline-block;
+            border-radius: 100px;
+        }
+        .lawyer_rating{
+            text-align: center;
+            i{
+                color: #f1c40f;
+            }
+        }
+        .laywer_price{
+         text-align: center;
+         font-size: 12px;
+         font-weight: 600;
+     }
+     .lawyer_offer{
+         text-align: center;
+         font-size: 12px;
+         font-weight: 600;
+     }
+ }
+
+ .lawyer_right{
+    display: inline-block;
+    max-width: 310px;
+    padding-left: 15px;
+    .name_lawfirm{
+
+    }
+    .lawyer_category{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .area_of_practice{
+        .badge{
+            font-size: 12px;
+            background-color: #34495e;
+            color: #fff;
+            padding: 1px 5px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+    }
+    .address{
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    .mode_of_working{
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    .lawfirm{
+
+    }
+}
+}
+
+
+
+.lawyer-calendar{
+    position: relative;
+    .bx-wrapper{
+        margin-bottom: 10px;
+        .bx-viewport{
+            height: auto !important;
+            .bxslider{
+                li{
+                    text-align: center;
+                    display: flex;
+                    align-items: stretch;
+                    flex-direction: column;
+                    padding: 0 10px;
+                    .calendar_legend{
+
+                        .calendar-slider-day{
+                            border-right: 1px solid #ececf0;
+                            border-bottom: 1px solid #ececf0;
+                            padding: 0;
+                            .time-table-header {
+                                background-color: #f3f3f3;
+                                padding: 10px;
+                            }
+                        }
+
+                        .flex-container{
+                            padding: 0;
+                            .flex-container{
+                                max-height: 400px;
+                                overflow-x: hidden;
+                                overflow-y: scroll;
+                            }
+                            .event-slot{
+                                display: block;
+                                padding: 5px 0px;
+                                border-bottom: 1px solid #ececf0;
+                                border-left: 1px solid #ececf0;
+                                border-right: 1px solid #ececf0;
+                                &:hover{
+                                    background-color: #121921;
+                                    color: #fff !important;
+                                    a{
+                                        color: #fff !important; 
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    .availability_calendar_block{
+                        font-size: .9rem;
+                        line-height: 1.3rem;
+                        color: #454d5d;
+                        text-align: center;
+                        display: flex;
+                        align-items: stretch;
+                        flex: 1;
+                        .flex-container{
+
+                            padding: 0;
+                            .event-slot{
+                                display: block;
+                                padding: 5px 0px;
+                                border-bottom: 1px solid #ececf0;
+                                border-left: 1px solid #ececf0;
+                                border-right: 1px solid #ececf0;
+                                &:hover{
+                                    background-color: #121921;
+                                    color: #fff;
+                                }
+                            }
+                        }
+                        .disabled {
+                            padding: 0;
+                            color: #9fa3ab;
+                            font-size: .9rem;
+                            display: flex;
+                            align-items: center;
+                            align-content: center;
+                            flex-direction: column;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+    .bx-controller {
+        display: block;
+        position: absolute;
+        top: 15px;
+        width: 100%;
+        #info-box-down {
+            display: block;
+            position: absolute;
+            left: 10px;
+        }
+        #info-box-up {
+            display: block;
+            position: absolute;
+            right: 10px;
+        }
+    }
+}
+
+.bx-wrapper{
+    position: relative;
+    .bx-controls{
+
+        .bx-controls-direction{
+            a.bx-prev{
+                top: 24px;
+                background: none;
+            }
+            a.bx-next{
+                top: 24px;
+                background: none;
+                right: 0;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .lawyer_block{
+
+        .lawyer_left{
+            display: block;
+            max-width: 100%;
+            .avatar {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .lawyer-calendar{
+        .bx-wrapper{
+            .bx-viewport{
+                .bxslider{
+                    li{
+                        .calendar_legend{
+                            .flex-container{
+                                .flex-container{
+                                    max-height: 300px;
+                                    overflow-x: hidden;
+                                    overflow-y: scroll;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

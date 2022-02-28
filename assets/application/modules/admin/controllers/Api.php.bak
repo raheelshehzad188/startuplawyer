@@ -1,0 +1,176 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Api extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function signup()
+	{
+header('Access-Control-Allow-Origin: *');
+		if($_POST)
+		{
+			$indata= array(
+				"email" =>$_POST['email'],
+				"upass" =>base64_encode($_POST['pass']),
+				"name" =>$_POST['name'],
+			);
+			$rdata = array();
+				if($this->db->insert('clients',$indata))
+				{
+					
+					$rdata = array(
+						"status" => 1
+					);
+				}
+				else
+				{
+					$rdata = array(
+						"status" => 0,
+						"text" => "server error"
+					);
+				}
+				echo json_encode($rdata);
+		}
+		else{
+			die("invalid request");
+		}
+	}
+	public function tib()
+	{
+		$assets = base_url('assets/admin');
+		
+		$data['assets'] = $assets;
+		$data['page'] = "tib";
+		$data['page'] = $this->db->get('patient')->result_array();
+		
+		$this->load->view('main', $data);
+	}
+	public function applogin()
+	{
+	header('Access-Control-Allow-Origin: *');
+		if($_POST)
+		{
+			$email = $_POST['email'];
+			$pass = $_POST['pass'];
+			$pass = base64_encode($pass);
+			$res = $this->db->where('email',$email)->where('upass',$pass)->get('clients')->result_array();
+			$rdata = array();
+				if(count($res) > 0 )
+				{
+					
+					$rdata = array(
+						"status" => 1,
+						"data" => $res[0],
+					);
+				}
+				else
+				{
+					$rdata = array(
+						"status" => 0,
+						"text" => "No Users Found"
+					);
+				}
+				echo json_encode($rdata);
+		}
+		else{
+			die("invalid request");
+		}
+	}
+	public function index()
+	{
+		$assets = base_url('assets/admin');
+		
+		$data['assets'] = $assets;
+		$this->load->view('main', $data);
+	}
+	public function addroute()
+	{
+		$assets = base_url('assets/admin');
+		
+		$data['assets'] = $assets;
+		$data['page'] = "addroute";
+		
+		$this->load->view('main', $data);
+	}
+	public function addcity()
+	{
+		if($_POST)
+		{
+			$this->db->insert('cities',$_POST);
+		}
+		$assets = base_url('assets/admin');
+		
+		$data['assets'] = $assets;
+		$data['page'] = "addcity";
+		
+		$this->load->view('main', $data);
+	}
+	public function route()
+	{
+		header('Access-Control-Allow-Origin: *');
+		$re = array();
+		$re[] = array(
+		'id '=>1,
+		"name"=>'KHB to LHR',
+		
+		);
+		$re[]= array(
+		'id '=>2,
+		"name"=>'KHB to LHR',
+		
+		);
+		$ret = array("status"=>1,"data"=>$re);
+		echo json_encode($ret);
+	}
+	public function dashboard()
+	{
+		$assets = base_url('assets/admin');
+		$clients= $this->db->get('clients')->result_array();
+		
+		$data['clients'] = count($clients);
+		$data['assets'] = $assets;
+		$data['page'] = "dashboard";
+		
+		$this->load->view('main', $data);
+	}
+	public function login()
+	{
+		$assets = base_url('assets/admin');
+		
+		$data['assets'] = $assets;
+		$this->load->view('login', $data);
+	}
+
+	public function single()
+	{
+		header('Access-Control-Allow-Origin: *');
+		$return  =  array(
+			'img'=>'https://i.stack.imgur.com/ddX9U.png"/',
+			'rname'=>'Lahore to Khushab',
+			'disc'=>'The most popular industrial group ever, and largely
+      responsible for bringing the music to a mass audience.',
+			'driver'=>'azeem ali',
+			'distance'=>'102KM',
+			'time'=>'11am - 3am'
+		);
+		$new = array(
+			'data'=>$return,
+			'status' => 1
+		);
+		echo json_encode($new);
+	}
+}

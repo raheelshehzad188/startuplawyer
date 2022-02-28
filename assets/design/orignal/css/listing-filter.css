@@ -1,0 +1,138 @@
+.lawyer_block {
+  position: relative;
+}
+.lawyer_block .lawyer_left {
+  display: inline-block;
+  max-width: 135px;
+}
+.lawyer_block .lawyer_left .avatar {
+  width: 120px;
+  height: 120px;
+    background-size: cover;
+  display: inline-block;
+  border-radius: 100px;
+}
+.lawyer_block .lawyer_left .lawyer_rating {
+  text-align: center;
+}
+.lawyer_block .lawyer_left .lawyer_rating i {
+  color: #f1c40f;
+}
+.lawyer_block .lawyer_left .laywer_price {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+.lawyer_block .lawyer_left .lawyer_offer {
+  text-align: center;
+  font-size: 12px;
+}
+.lawyer_block .lawyer_right {
+  display: inline-block;
+  max-width: 310px;
+  padding-left: 15px;
+}
+.lawyer_block .lawyer_right .lawyer_category {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.lawyer_block .lawyer_right .area_of_practice .badge {
+  font-size: 12px;
+  background-color: #34495e;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.lawyer_block .lawyer_right .address {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.lawyer_block .lawyer_right .mode_of_working {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.lawyer-calendar {
+  position: relative;
+}
+.lawyer-calendar .bx-wrapper {
+  margin-bottom: 10px;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport {
+  height: auto;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  padding: 0 10px;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .calendar_legend .calendar-slider-day {
+  border-right: 1px solid #ececf0;
+  border-bottom: 1px solid #ececf0;
+  padding: 0;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .availability_calendar_block {
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  color: #454d5d;
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .availability_calendar_block .flex-container {
+  padding: 0;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .availability_calendar_block .flex-container .event-slot {
+  display: block;
+  padding: 5px 0px;
+  border-bottom: 1px solid #ececf0;
+  border-left: 1px solid #ececf0;
+  border-right: 1px solid #ececf0;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .availability_calendar_block .flex-container .event-slot:hover {
+  background-color: #121921;
+  color: #fff;
+}
+.lawyer-calendar .bx-wrapper .bx-viewport .bxslider li .availability_calendar_block .disabled {
+  padding: 0;
+  color: #9fa3ab;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+}
+.lawyer-calendar .bx-controller {
+  display: block;
+  position: absolute;
+  top: 15px;
+  width: 100%;
+}
+.lawyer-calendar .bx-controller #info-box-down {
+  display: block;
+  position: absolute;
+  left: 10px;
+}
+.lawyer-calendar .bx-controller #info-box-up {
+  display: block;
+  position: absolute;
+  right: 10px;
+}
+
+.bx-wrapper {
+  position: relative;
+}
+.bx-wrapper .bx-controls .bx-controls-direction a.bx-prev {
+  top: 20px;
+  background: none;
+}
+.bx-wrapper .bx-controls .bx-controls-direction a.bx-next {
+  top: 20px;
+  background: none;
+}
+
+/*# sourceMappingURL=listing-filter.css.map */
