@@ -18,6 +18,19 @@ class Index extends CI_Controller {
 		$this->load->library('template');
 		$this->template->foogra('blog',$data);
 	}
+    public function checkout()
+	{
+		$data= array();
+		$data['assets']= base_url('assets/books/');
+		$data['hclass']= 'header_in clearfix';
+		$url = base_url('assets/design/');
+		$css = array();
+		$css[] = $url.'css/bootstrap_customized.min.css';
+		$css[] = $url.'css/blog.css';
+		$data['css'] = $css;
+		$this->load->library('template');
+		$this->template->foogra('checkout',$data);
+	}
     public function deadline()
     {
         if(isset($_REQUEST['hash']) && isset($_REQUEST['type']))

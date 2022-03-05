@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api extends CI_Controller {
 
 	/**
-	 * Index Page for this controller.
+	 * Indfan ex Page for this controller.
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
@@ -185,23 +185,39 @@ class Api extends CI_Controller {
             	             'pid' =>$_REQUEST['product_id'],
             	             'cmt' =>$_REQUEST['cmt'],
             	             'qty' =>$_REQUEST['qty'],
+            	             'lang' =>$_REQUEST['lang'],
+            	             'location' =>$_REQUEST['location'],
             	         );
+						 
 	        
 	     }else{
-	      echo json_encode($ret);   
+	      echo json_encode($ret);
 	      exit();
 	     }
+		 $cart = array();
+			 if($_SESSION['addcart'])
+			 {
+				 $cart= $_SESSION['addcart'];
+			 }
+			 $cp = array();
+			 $cpi = 0;
+			 foreach($cart as $k => $v)
+			 {
+				 $cp[] = $v['pid'];
+			 }
 	     
 	     
         
          
-         if(in_array($pid, $_SESSION['addcart']))
+         if(in_array($pid, $cp))
          {
-             $_SESSION['addcart']['qty'] = $_SESSION['addcart']['qty']+1;
+			 $i = array_search($pid, $cp);
+             $_SESSION['addcart'][$i]['qty'] = $_SESSION['addcart'][$i]['qty']+1;
              
              $ret = array(
 	         'status'=> 1,
-	         'msg' => 'Product update in your Cart!'
+	         'msg' => 'Product update in your Cart!',
+	         'red' => base_url('index/checkout')
 	         );
             	     
 	         echo json_encode($ret);
@@ -209,12 +225,15 @@ class Api extends CI_Controller {
 	         
          }
          else
-         { 	   
-            $_SESSION['addcart'] = $list;
+         {
+			 $cart[] = $list;
+			 
+            $_SESSION['addcart'] = $cart;
              
 	        $ret = array(
 	         'status'=> 1,
-	         'msg' => 'Product Added in your Cart!'
+	         'msg' => 'Product Added in your Cart!',
+			 'red' => base_url('index/checkout')
 	         );
 	        echo json_encode($ret);
 	        exit();
@@ -1087,6 +1106,10 @@ if ($err) {
 $username = (isset($_REQUEST['user_name'])?$_REQUEST['user_name']:'');
 $email = (isset($_REQUEST['email'])?$_REQUEST['email']:'');
 $password = (isset($_REQUEST['pass'])?$_REQUEST['pass']:'');
+if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'checkout')
+{
+	$username = $email;
+}
 if ($username == "" || $email == '' || $password == "") {
     $responseData['msg'] = 'All fields are required.';
     $responseData['status'] = "0";
@@ -1094,7 +1117,10 @@ if ($username == "" || $email == '' || $password == "") {
     exit();
 } else {
                 //db insertion
-                $username = $sid;
+				if(isset($_REQUEST['type']) && $_REQUEST['type'] != 'checkout' && $sid)
+				{
+					$username = $sid;
+				}
                 if (!$this->checkEmail($email)) 
                 {
                     $responseData['message'] = "Email is not Valid.";
@@ -1127,7 +1153,12 @@ if ($username == "" || $email == '' || $password == "") {
                 }
                 else
                 {
-                    $password = md5(time());
+					$type = $_REQUEST['type'];
+					if($type != 'checkout')
+					{
+						$password = time();
+					}
+                    $password = md5($password);
                     $user_data = array(
                         'user_login' => $username,
                         'user_email' => $email,
@@ -1138,8 +1169,34 @@ if ($username == "" || $email == '' || $password == "") {
                     if ($user_id)
                     {
                         $uid = $user_id;
+						$this->load->model('Product_model');
+        $product = $this->Product_model;
+						if(isset($_REQUEST['first_name']) && !empty($_REQUEST['first_name']))
+						{
+							$product->updatemeta('user',$user_id,'first_name',$_REQUEST['first_name']);
+						}
+						if(isset($_REQUEST['last_name']) && !empty($_REQUEST['last_name']))
+						{
+							$product->updatemeta('user',$user_id,'last_name',$_REQUEST['last_name']);
+						}
+						if(isset($_REQUEST['company']) && !empty($_REQUEST['company']))
+						{
+							$product->updatemeta('user',$user_id,'company',$_REQUEST['company']);
+						}
+						if(isset($_REQUEST['designation']) && !empty($_REQUEST['designation']))
+						{
+							$product->updatemeta('user',$user_id,'designation',$_REQUEST['designation']);
+						}
+						if(isset($_REQUEST['district']) && !empty($_REQUEST['district']))
+						{
+							$product->updatemeta('user',$user_id,'district',$_REQUEST['district']);
+						}
+						if(isset($_REQUEST['billing_phone']) && !empty($_REQUEST['billing_phone']))
+						{
+							$product->updatemeta('user',$user_id,'billing_phone',$_REQUEST['billing_phone']);
+						}
                         
-                        if($type == 'front')
+                        if($type == 'front' || $type == 'checkout')
                         {
                                     $role = array(
 	    'customer' => 1
@@ -1162,6 +1219,15 @@ if ($username == "" || $email == '' || $password == "") {
                         $responseData['message'] = "Successfully Registered!";
                         $responseData['error'] = "0";
                         $responseData['user'] = $user;
+						if($type == 'checkout')
+						{
+							$responseData['msg'] = "Successfully Registered, Redirecting ----";
+							$responseData['status'] = "1";
+							$responseData['red'] = base_url('/index/page/checkout')."?tab=three";
+							
+						}
+					echo json_encode($responseData);
+					exit();
                     }
                 }
             }
@@ -2446,6 +2512,14 @@ if (isset($_REQUEST['type']) && isset($_REQUEST['sid']))
 	    $role = serialize($role);
 	    $role = $product->updatemeta('user',$user_id,'wp_capabilities',$role);
                         }
+						else if($type == 'checkout')
+                        {
+                                    $role = array(
+	    'customer' => 1
+	    );
+	    $role = serialize($role);
+	    $role = $product->updatemeta('user',$user_id,'wp_capabilities',$role);
+                        }
                         else
                         {
                                                         $role = array(
@@ -2550,6 +2624,10 @@ exit();
                 	    $url = base_url('admin/admin');
                 	    
                 	    }
+						if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'checkout')
+						{
+							$url = base_url('/index/page/checkout')."?tab=three";
+						}
                 	    
                 	    
                 $ret = array(

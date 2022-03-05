@@ -1,0 +1,2 @@
+SKU,Author,Name,Type,Price,Category,"Sub Category","Short Discription","Long Discription","Dead Line",Image,Tags,"Package Products",Slug,"Product Status","Product Language"
+" sku-test123",brandtestingSP1.SL@gmail.com,,variable,1000,course,,<p>short</p>,<p>Long</p>,,https://startuplawyer.lk/main/uploads/1627794864.jpg,tags,"package products",test-product,publish,languages

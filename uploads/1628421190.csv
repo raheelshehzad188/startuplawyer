@@ -1,0 +1,51 @@
+SKU,Name,Type,Price,Category,"Short Discription","Long Discription","Dead Line",Image
+,"test webinar",simple,100,Webinar,,"test webinar",2,https://startuplawyer.lk/dev/wp-content/uploads/1624983953.png
+,"meeting booking product",simple,100,Booking,,"meeting booking product",10,https://startuplawyer.lk/dev/wp-content/uploads/1624983707.png
+CONSULT.001-1,"Consultations – Paid",simple,1000,Booking,"Short description Short description Short description Short description Short description Short description Short description Short description
+
+Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description","Consultations – Paid",1,https://startuplawyer.lk/dev/wp-content/uploads/2021/03/The-Working-Mothers-Tug-Of-War.jpg
+SERVICE.001,"Professional Advice or Opinion",variable,,Services,"Short description Short description Short description Short description Short description Short description Short description Short description
+
+Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description","Professional Advice or Opinion",7,https://startuplawyer.lk/dev/wp-content/uploads/2021/03/The-Working-Mothers-Tug-Of-War.jpg
+,"New package product",simple,16000,"Change Management","Small desc Small descSmall descSmall descSmall descSmall descSmall descSmall desc","New package product",10,https://startuplawyer.lk/dev/wp-content/uploads/1624310959.png
+,"New package",simple,,,,"New package",,
+,"New Webinar Product - Covid response for Startups",simple,15000,Webinar,"This is the short description. This is the short description. This is the short description. This is the short description. This is the short description.
+
+This is the short description. This is the short description. This is the short description. This is the short description.
+
+This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description.","New Webinar Product - Covid response for Startups",1,https://startuplawyer.lk/dev/wp-content/uploads/2020/07/brett-jordan-gmZfmW5VGeU-unsplash-scaled.jpg
+,"New Course Product - How to register a sole proprietorship",simple,11000,Courses,"This is the short description. This is the short description. This is the short description. This is the short description. This is the short description.
+
+This is the short description. This is the short description. This is the short description. This is the short description.
+
+This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description.","New Course Product - How to register a sole proprietorship",20,https://startuplawyer.lk/dev/wp-content/uploads/2021/02/1_lR6oU5-XKHH_8I9S-hjOqg.png
+,"New Service Product - register trademark",simple,15000,Services,"This is the short description. This is the short description. This is the short description. This is the short description. This is the short description.
+
+This is the short description. This is the short description. This is the short description. This is the short description.
+
+This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description. This is the short description.","New Service Product - register trademark",20,https://startuplawyer.lk/dev/wp-content/uploads/2020/07/maria-ziegler-jJnZg7vBfMs-unsplash-scaled.jpg
+,"viseo package product",simple,,,,"viseo package product",,
+,,simple,,,"<p><br data-mce-bogus=""1""></p>",,,
+1234567-1-1-1,"XYZ webinar",simple,5000,Webinar,,"XYZ webinar",0,https://startuplawyer.lk/dev/wp-content/uploads/2020/07/brett-jordan-gmZfmW5VGeU-unsplash-scaled.jpg
+1234567-1-1,"How Lawyers can be more marketable",simple,5000,Webinar,,"How Lawyers can be more marketable",0,
+1234567-1,"Employment issues during Covid and how to handle them",simple,5000,Courses,,"Employment issues during Covid and how to handle them",0,https://startuplawyer.lk/dev/wp-content/uploads/2020/07/Succession-Planning-AT-02-20-2017.jpg
+1234567,"How to start your business",simple,15000,Courses,"Short description ShorShort descriptionShort descriptionShort description
+
+Short descriptionShort descriptionShort description
+
+Short descriptionShort descriptiont description","How to start your business",0,
+,"Incorporating a company",simple,10000,Services,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","Incorporating a company",14,
+,"Draft change management plan",simple,20000,Services,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","Draft change management plan",1,
+,"Brainstorming session - drafting Articles",simple,2000,Booking,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","Brainstorming session - drafting Articles",1,https://startuplawyer.lk/dev/wp-content/uploads/2021/02/download.png
+,"Mentoring session - 1 hr",simple,2000,Booking,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","Mentoring session - 1 hr",1,https://startuplawyer.lk/dev/wp-content/uploads/2020/07/maria-ziegler-jJnZg7vBfMs-unsplash-scaled.jpg
+,"Making peace - 1 hour consultation",simple,6000,Booking,"fffffffffff
+ffffff
+ffffffffffffff","Making peace - 1 hour consultation",2,
+,"Starting a new business - 1 hour consultation",simple,6000,Booking,"fffffffffff
+ffffff
+ffffffffffffff","Starting a new business - 1 hour consultation",2,
+,"How to manage change - 1 hr coaching session",simple,7000,Booking,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","How to manage change - 1 hr coaching session",1,
+,"2 hour Subsequent Consultation",simple,7000,Booking,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","2 hour Subsequent Consultation",1,
+,"2 hour Subsequent Consultation",simple,7000,Booking,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","2 hour Subsequent Consultation",1,
+,"1 hour Consultation",simple,5000,Booking,"Short descriptiion Short descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiionShort descriptiion","1 hour Consultation",1,
+OK

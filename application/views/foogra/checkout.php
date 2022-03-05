@@ -101,6 +101,7 @@
    .cctabs {
    width: 100%;
    margin: 100px auto;
+   padding:0 150px;
    }
    .cctabs input[type="radio"] {
    opacity: 0;
@@ -275,7 +276,7 @@
        border:1px solid #d2d8dd;
    }
    .dsn{
-           padding: 0 192px;
+           padding: 0 143px;
    } 
    .lower h5{
        text-align: center;
@@ -301,16 +302,22 @@
         display:flex;
     }
     .pay2, .pay3, .pay4{
-        padding:10px 45px 0 0;
+        padding: 10px 2px 0 0;
+        width: 100%;
     }
     #one, #two, #three, #four, #five{
-        padding:09px;
+        padding:9px;
+    }
+    #info{
+        width: 100%;
+        height: auto;
+
     }
    @media only screen and (max-width: 600px) {/*---------for mob-------*/
-       .dsn{
+        .cctabs, .dsn{
            padding:0;
        }
-       .lower h4{
+       .lower, .lower h4{
        text-align: center;
            
        }
@@ -328,15 +335,15 @@
    <div class="container">
       <div class="wrapper">
          <div class="cctabs">
-            <input checked id="one" name="tabs" type="radio">
+            <input <?= (!isset($_REQUEST['tab'])?"checked":""); ?> id="one" name="tabs" type="radio">
             <label for="one"> Checkout</label>
-            <input id="two" name="tabs" type="radio" value="Two">
+            <input <?= (isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'two'?"checked":""); ?> id="two" name="tabs" type="radio" value="Two">
             <label for="two">Login or Guest</label>
-            <input id="three" name="tabs" type="radio">
+            <input <?= (isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'three'?"checked":""); ?> id="three" name="tabs" type="radio">
             <label for="three"> Update Instructions</label>
-            <input id="four" name="tabs" type="radio">
+            <input <?= (isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'four'?"checked":""); ?> id="four" name="tabs" type="radio">
             <label for="four">Payment</label>
-            <input id="five" name="tabs" type="radio">
+            <input  <?= (isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'five'?"checked":""); ?> id="five" name="tabs" type="radio">
             <label for="five"> Receipt</label>
             
             <div class="panels">
@@ -346,9 +353,6 @@
                   <div class="card">
                      <div class="row container">
                         <div class="col-md-8 col-sm-4">
-                           <h5> Name of sp</h5>
-                        </div>
-                        <div class="col-md-8 col-sm-4">
                            <div class="action">
                                 <span class="action-delete">
                                     <i class="feather icon-trash"></i>
@@ -356,26 +360,55 @@
                                 </div>
                         </div>
                      </div>
+					 <?php
+				  $cart = $_SESSION['addcart'];
+				  $mtot = 0;
+				  foreach($cart as $k=> $v)
+				  {
+					  
+					  $pid = +$v['pid'];
+					  $lang = '';
+					  if(isset($v['lang']))
+					  {
+						  $post = $product->getpost($v['lang']);
+                                                if($post)
+                                                {
+                                                    $lang = $post->post_title;;
+                                                }
+					  }
+					  $pro = $product->getproduct( $pid );
+$terms = $product->getcat( $pro->catID);
+ $recent_author = $product->getuser($pro->uid);
+ $tot = $pro->price * $v['qty'];
+ $mtot = $mtot + $tot;
+					  ?>
                      <div class="row align-items-center no-gutters p-md-2 container">
+					 <div>
+					 <?= $recent_author->full_name ?>
+					 </div>
                         <div class="col-lg-2">
-                           <img src="url()" alt="here " class="img-fluid">
+                           <img src="<?= $pro->img; ?>" alt="here " class="img-fluid">
                         </div>
                         <div class="col-lg-5 pl-lg-3 mb-2 mb-lg-0">
-                           <h2 class="h5 mb-0">Name of Product</h2>
-                           <span>Selected variations1,</span>
-                           <span>Selected variations2,</span>
-                           <span>Selected Ianguage,</span>
+                           <h2 class="h5 mb-0"><?= $pro->name?></h2>
+                           <!--<span>Selected variations1,</span>
+                           <span>Selected variations2,</span>-->
+                           <span><?= $lang ?></span>
                         </div>
                         <div class="col-6 col-lg-2">
-                           <input type="number" value="1" class="form-control">
+                           <input type="number" value="<?= $v['qty'] ?>" class="form-control">
                         </div>
                         <div class="col-6 col-lg-3 text-right">
-                           <div class="h5 mb-0">$490,00</div>
-                           <small class="text-muted">
+                           <div class="h5 mb-0">LKR <?= $tot; ?></div>
+                           <!--<small class="text-muted">
                            <s>$877,00</s>
-                           </small>
+                           </small>-->
                         </div>
                      </div>
+					 
+					 <?php
+				  }
+					 ?>
                   </div>
                   <div class="card" style="margin-top: 35px; ">
                      <div class="bg-white shadow-sm rounded mb-3 p-3">
@@ -403,7 +436,7 @@
                                       <div class="h4 mb-0">Total price</div>
                                   </div>
                                 <div class="col-6 text-right">
-                                    <div class="h4 mb-0">$ 490,00</div>
+                                    <div class="h4 mb-0">LKR <?= $mtot; ?></div>
                                 </div>
                             </div>
                         </div>
@@ -413,9 +446,10 @@
                 <div class="py-3" style="padding-top:35px;">
                     <div class="row align-items-center no-gutters">
                         <div class="col-6">
-                            <a href="#" class="btn btn-darks btn-primary btn-rounded px-lg-5">Shop more</a></div>
+                            <a href="<?= base_url(); ?>" class="btn btn-darks btn-primary btn-rounded px-lg-5">Shop more</a></div>
                             <div class="col-6 text-right">
-                                <a href="#" class="btn btn-primary btn-rounded px-lg-5 nxt">Next step</a>
+							
+                                <a href="?tab=two" class="btn btn-primary btn-rounded px-lg-5 nxt">Next step</a>
                             </div>
                         </div>
                   </div></div>
@@ -460,34 +494,38 @@
                                                     <div class="card-body p-0">
                                                         <hr class="m-0">
                                                    <div class="p-4 p-md-6">
-                                   <form>
+                                   <form id="checkout_register" action="<?= base_url('api/register'); ?>" >
+										<input type="hidden" value="checkout" name="type" />
                                       <div class="row">
                                          <div class="col-md-6">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="First name: *" ></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="First name: *" name="first_name" ></div>
                                          </div>
                                          <div class="col-md-6">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Last name: *"></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Last name: *" name="last_name"></div>
                                          </div>
                                          <div class="col-md-12">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Company name:"></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Company name:" name="s"></div>
                                          </div>
                                          <div class="col-md-4">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Designation: *"></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Designation: *" name="designation"></div>
                                          </div>
                                          <div class="col-md-8">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="District: *"></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="District: *" name="district"></div>
                                          </div>
                                          <div class="col-md-6">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Email: *"></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Email: *" name="email"></div>
                                          </div>
                                          <div class="col-md-6">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Phone: *"></div>
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Phone: *" name="billing_phone"></div>
+                                         </div>
+                                         <div class="col-md-12">
+                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Password: *" name="pass"></div>
                                          </div>
                                          <div class="col-md-12">
                                             <div class="custom-control custom-checkbox custom-checkbox-primary py-2"><input type="checkbox" class="custom-control-input" id="customExampleCheck1"> <label class="custom-control-label" for="customExampleCheck1">I have read and accepted the <a href="#">terms and conditions</a></label></div>
                                             <div class="custom-control custom-checkbox custom-checkbox-primary py-2"><input type="checkbox" class="custom-control-input" id="customExampleCheck2"> <label class="custom-control-label" for="customExampleCheck2">Subscribe to exciting newsletters and great tips</label></div>
                                          </div>
-                                         <div class="col-md-12 text-right py-4"><a href="checkout-delivery.html" class="btn btn-primary">Create an account</a></div>
+                                         <button class="btn_1 full-width mb_5" onclick="submit_form('checkout_register');" type="button">Create an account</button>
                                       </div>
                                    </form>
                                 </div>
@@ -502,13 +540,14 @@
                                       <div class="card-body p-0">
                                          <hr class="m-0">
                                          <div class="p-4 p-md-6">
-                                            <form>
+                                            <form action="<?= base_url('/api/front_login'); ?>" id="checkout_login">
+											<input type="hidden" name="type" value="checkout" />
                                                <div class="row justify-content-center py-4">
-                                                  <div class="col-md-8">
-                                                     <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Email"></div>
-                                                     <div class="form-group"><input type="password" value="" class="form-control form-control-simple" placeholder="Password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
+                                                  <div class="col-md-12">
+                                                     <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Email" name="uname" /></div>
+                                                     <div class="form-group"><input type="password" value="" class="form-control form-control-simple" placeholder="Password" name="upass" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
                                                      <div class="custom-control custom-checkbox custom-checkbox-primary py-2"><input type="checkbox" class="custom-control-input" id="rememberCheck"> <label class="custom-control-label" for="rememberCheck">Remember me</label></div>
-                                                     <div class="text-right py-4"><a href="checkout-delivery.html" class="btn btn-dark">Sign in</a></div>
+                                                     <button class="btn_1 full-width mb_5" onclick="submit_form('checkout_login');" type="button">Sign in</button>
                                                   </div>
                                                </div>
                                             </form>
@@ -552,19 +591,60 @@
                    <div class="container dsn">
                        <p style="text-transform: uppercase;">Specia instructions</p>
                        <div class="card">
+					   
                            <div><b>Full Name of sp></b></div>
-                            <div class="row">
-                                <div class= "col-lg-2 col-sm-2"><img src="" ></div>
-                                <div class= "col-lg-6 col-sm-6">
-                                    <p><b>Name of Product</b></p>
-                                    <p>seIected variation1, seIected Ianguage</p>
-                                </div>
-                                <div class= "col-lg-4 col-sm-4 box"></div>
-                                
-                            </div>
+						   <?php
+                              $cart = $_SESSION['addcart'];
+				  $mtot = 0;
+				  foreach($cart as $k=> $v)
+				  {
+					  
+					  $pid = +$v['pid'];
+					  $lang = '';
+					  if(isset($v['lang']))
+					  {
+						  $post = $product->getpost($v['lang']);
+                                                if($post)
+                                                {
+                                                    $lang = $post->post_title;;
+                                                }
+					  }
+					  $pro = $product->getproduct( $pid );
+$terms = $product->getcat( $pro->catID);
+ $recent_author = $product->getuser($pro->uid);
+ $tot = $pro->price * $v['qty'];
+ $mtot = $mtot + $tot;
+					  ?>
+                     <div class="row align-items-center no-gutters p-md-2 container">
+					 <div>
+					 <?= $recent_author->full_name ?>
+					 </div>
+                        <div class="col-lg-2">
+                           <img src="<?= $pro->img; ?>" alt="here " class="img-fluid">
+                        </div>
+                        <div class="col-lg-5 pl-lg-3 mb-2 mb-lg-0">
+                           <h2 class="h5 mb-0"><?= $pro->name?></h2>
+                           <!--<span>Selected variations1,</span>
+                           <span>Selected variations2,</span>-->
+                           <span><?= $lang ?></span>
+                        </div>
+                        <div class="col-6 col-lg-2">
+                           <textarea class="form-control" ><?= $v['msg'] ?></textarea>
+                        </div>
+                        <div class="col-6 col-lg-3 text-right">
+                           <div class="h5 mb-0">LKR <?= $tot; ?></div>
+                           <!--<small class="text-muted">
+                           <s>$877,00</s>
+                           </small>-->
+                        </div>
+                     </div>
+					 
+					 <?php
+				  }
+					 ?>
                        </div>
                        <br><br>
-                             <a href="#" class="btn btn-primary btn-rounded px-lg-5 nxt" style="float: right;">Next step</a>
+                             <a href="?tab=four" class="btn btn-primary btn-rounded px-lg-5 nxt" style="float: right;">Next step</a>
                     </div>
                     <div class="lower">
                      <h5>WHAT OTHERS HAVE TO SAY?</h5>
@@ -589,9 +669,7 @@
                                <label class="custom-control-label pl-2 pl-lg-4" for="customRadio2">
                                    <div class="h5 m-0">Payhere</div>
                                    <div>
-                                       <img src="#">
-                                       <img src="#">
-                                       <img src="#">
+                                       <img src="https://pendi.lk/store/images/payhere.png">
                                    </div>
                                    <div class="pay">
                                        <div class="pay2">
@@ -641,9 +719,9 @@
           <div class="py-3" style="padding-top:35px;">
                     <div class="row align-items-center no-gutters">
                         <div class="col-6">
-                            <a href="#" class="btn btn-darks btn-primary btn-rounded px-lg-5">Instructions</a></div>
+                            <a href="?three" class="btn btn-darks btn-primary btn-rounded px-lg-5"></a></div>
                             <div class="col-6 text-right">
-                                <a href="checkout-login.html" class="btn btn-primary btn-rounded px-lg-5 nxt">Complete</a>
+                                <a href="?tab=five" class="btn btn-primary btn-rounded px-lg-5 nxt">Complete</a>
                             </div>
                         </div>
                   </div>
@@ -697,7 +775,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <lable>whatsapp or mobile</lable><br>
-                                            <input type="tel" id="" placeholder=" Nimra">
+                                            <input type="tel" id="" placeholder=" +92 301 1234678">
                                         </div>
                                         <div class="col-6">
                                             <lable>designation</lable><br>
