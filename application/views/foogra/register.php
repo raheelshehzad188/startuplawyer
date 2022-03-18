@@ -1,6 +1,18 @@
+
 <style>
     .clearfix ul#menu-header-menu li a {
     color: #494444;
+}
+label {
+  font-weight: 500;
+  margin: 5px 0px 5px 0;
+}
+a.btn_1.full-width,
+.btn_1.full-width {
+    margin-top:20px;
+}
+footer{
+    margin-top:-60px;
 }
 </style>
 <main class="bg_gray pattern">
@@ -11,13 +23,13 @@
 		        	<div class="sign_up">
 		                <div class="head">
 		                    <div class="title">
-		                    <h3>Sign Up</h3>
+		                    <h3>Register</h3>
 		                </div>
 		                </div>
 		                <!-- /head -->
 		                <div class="main">
-		                	<a href="#0" class="social_bt facebook" onclick="tlogin();">Login with Facebook</a>
-				<a href="#0" class="social_bt google"  id="googleSignIn">Login with Google</a>
+		                	<a href="#0" class="social_bt facebook" onclick="tlogin();">Register with Facebook</a>
+				<a href="#0" class="social_bt google"  id="googleSignIn">Register with Google</a>
 							<div class="divider"><span>Or</span></div>
 		                	<h6>Personal details</h6>
 		                	<form method="post" action="<?= base_url(); ?>auth/create" id="register_form" >
@@ -77,8 +89,8 @@
                                                       <button class="btn_1 full-width mb_5" type="submit" >Submit</button>
                                                 
                                                 <div class="text-center1">
-                                               <div> Did you have account?</div>
-                                               <div><a id="sign-in1" href="#">Sign in </a></div>
+                                               <div> Already have an account?</div>
+                                               <div><a id="sign-in1" href="#">Log in </a></div>
                                                 </div>
 </form> 
 		                    

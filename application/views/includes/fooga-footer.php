@@ -418,7 +418,7 @@ Please register to be informed every time free resources are posted.</p>
 	<!-- Sign In Modal -->
 	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide"> 
 		<div class="modal_header">
-			<h3>Sign In</h3>
+			<h3>Log In</h3>
 		</div>
 		<form method="post" action="<?= base_url(); ?>api/front_login" id="login_form" >
 			<div class="sign-in-wrapper">
@@ -435,6 +435,17 @@ Please register to be informed every time free resources are posted.</p>
 					<input type="password" class="form-control" name="upass" id="password" value="" style="width:100%;">
 					<i class="icon_lock_alt"></i>
 				</div>
+				 <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-label-group">
+                                                                 <label for="inputConfPassword">Signup as</label>
+                                                                <select name="role"  class="form-control">
+                                                                    <option value="customer">Customer</option>                            <option value="draft_provider">Service Provider</option>
+                                                                </select>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
 				<div class="clearfix add_bottom_15">
 					<div class="checkboxes float-left">
 						<label class="container_check">Remember me
@@ -446,7 +457,7 @@ Please register to be informed every time free resources are posted.</p>
 				</div>
 				<div class="text-center">
 					<button  type="button" onclick="submit_form('login_form');" id="sbtn" class="btn_1 full-width mb_5">Log In</button>
-					Don’t have an account? <a href="<?= base_url('auth/register'); ?>">Sign up</a>
+					Don’t have an account? <a href="<?= base_url('auth/register'); ?>">Register</a>
 				</div>
 				
 				</form>

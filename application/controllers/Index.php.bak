@@ -18,9 +18,52 @@ class Index extends CI_Controller {
 		$this->load->library('template');
 		$this->template->foogra('blog',$data);
 	}
+    public function corder()
+	{
+		
+		$oid = 0;
+		if(isset($_SESSION['knet_login']))
+		{
+			$tot = 0;
+			$cart = $_SESSION['addcart'];
+			$this->load->model('Product_model');
+			$product = $this->Product_model;
+			foreach($cart as $k=> $v)
+			{
+													  $pro = $product->getproduct( $v['pid'] );
+$terms = $product->getcat( $pro->catID);
+ $recent_author = $product->getuser($pro->uid);
+				$tot = $tot +($pro->price * $v['qty']);
+			}
+			$uid = $_SESSION['knet_login']->ID;
+			$in = array(
+			'order_no' => time(),
+			'uid' => $uid,
+			'total' => $tot
+			);
+			$this->db->insert('orders',$in);
+			$oid = $this->db->insert_id();
+			//orders
+		}
+		return $oid;
+	}
     public function checkout()
 	{
 		$data= array();
+		if(isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'payment')
+		{
+			$cart = $_SESSION['addcart'];
+			foreach($cart as $k=> $v)
+			{
+				if(isset($_REQUEST['inst'][$k]['inst']))
+				$cart[$k]['cmt'] =  $_REQUEST['inst'][$k]['inst'];
+			}
+			$_SESSION['addcart'] = $cart;
+			//create order here
+			$data['order_id'] = $this->corder();
+			var_dump($data['order_id']);
+			
+		}
 		$data['assets']= base_url('assets/books/');
 		$data['hclass']= 'header_in clearfix';
 		$url = base_url('assets/design/');
@@ -29,7 +72,7 @@ class Index extends CI_Controller {
 		$css[] = $url.'css/blog.css';
 		$data['css'] = $css;
 		$this->load->library('template');
-		$this->template->front('checkout',$data);
+		$this->template->foogra('checkout',$data);
 	}
     public function deadline()
     {

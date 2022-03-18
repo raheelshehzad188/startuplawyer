@@ -91,7 +91,7 @@ $url = base_url('assets/design/');
 		    ?>
 			<li>
 			    	<div id="cart" class="hidden-xs" >
-			<a href="<?= base_url('index/page/checkout'); ?>">
+			<a href="<?= base_url('index/checkout'); ?>">
                 <?php
 			    $cimg = (isset($hclass)?get_assets_url().'/'.'img/cart.png':get_assets_url().'/'.'img/cart2.png');
 			    $himg = (isset($hclass)?get_assets_url().'/'.'img/hblack.png':get_assets_url().'/'.'img/wheart.png');

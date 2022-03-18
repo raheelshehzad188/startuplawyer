@@ -1,6 +1,5 @@
 <div id="fb-root"></div>
 <main class="bg_gray pattern">
-		
 		<div class="container margin_60_40">
 		    <div class="head">
 		                    <div class="title">

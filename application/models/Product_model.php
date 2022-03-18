@@ -621,6 +621,7 @@ public function bubble_sort($arr) {
                     //type
                     $type = $this->getmeta('user',$mediaID,'type',true);
                     $row->first_free_cons = $this->getmeta('user',$mediaID,'first_free_cons',true);
+                    $row->designation = $this->getmeta('user',$mediaID,'designation',true);
                     $row->refund = $this->getmeta('user',$mediaID,'refund',true);
                     $ty = array();
                     $type = explode(',',$type);

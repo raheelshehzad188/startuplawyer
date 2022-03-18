@@ -365,7 +365,7 @@ class Product_model extends CI_Model {
         {
             ?>
                <label style="margin-top:7px;">Select Language:</label>
-            <select class="location" name="location" style="width:100%; height: 40px !important;">
+            <select class="lang" name="lang" style="width:100%; height: 40px !important;">
                     <?php
                     
                     $locations = $this->db->where('pid',$product_id)->get('product_to_languages')->result();

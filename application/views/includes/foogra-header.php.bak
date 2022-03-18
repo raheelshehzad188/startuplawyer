@@ -1,5 +1,4 @@
 <?php
-die("OK");
 $url = base_url('assets/design/');
 ?>
 <!DOCTYPE html>

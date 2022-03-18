@@ -84,6 +84,98 @@ class Api extends CI_Controller {
 	        }
 	    }
 	 }
+	 public function uqty()
+	 {
+	     $ret = array(
+	         'status'=> 0,
+	         'msg' => 'Invalid request!'
+	         );
+	     $pid = 0;
+	     $qty = 0;
+	     if(isset($_REQUEST['pid']) && isset($_REQUEST['qty']))
+	     {
+	         $pid = $_REQUEST['pid'];
+	         $qty = $_REQUEST['qty'];
+	     }
+	     else
+	     {
+	      echo json_encode($ret);   
+	      exit();
+	     }
+	     $list = array();
+	     if(isset($_SESSION['addcart']) )
+	     {
+	         
+	                if($pid != '')
+	                {
+	                    $this->load->model('Product_model');
+        $product = $this->Product_model;
+	                    $item = $_SESSION['addcart'][$pid];
+	                     $_SESSION['addcart'][$pid]['qty'] = $qty;
+	                     $pro = $product->getproduct( $item['pid'] );
+$terms = $product->getcat( $pro->catID);
+ $tot = $pro->price * $qty;
+ //get all total 
+ $ctot = 0;
+ foreach($_SESSION['addcart'] as $k=> $v)
+ {
+     $pro = $product->getproduct( $v['pid'] );
+$terms = $product->getcat( $pro->catID);
+ $stot = $pro->price * $v['qty'];
+ $ctot = $stot + $ctot;
+ }
+ //get all total 
+	                         $ret = array(
+	                             
+	         'status'=> 1,
+	         'item_tot'=> $tot,
+	         'tot'=> $ctot,
+	         'msg' => 'Quantity update successfully!'
+	         );
+	         echo json_encode($ret);
+	         exit();   
+	                }
+	             
+	     }
+	     	         echo json_encode($ret);
+	         exit();   
+	 }
+	 public function rcart()
+	 {
+	     $ret = array(
+	         'status'=> 0,
+	         'msg' => 'Invalid request!'
+	         );
+	     $pid = 0;
+	     if(isset($_REQUEST['pid']))
+	     {
+	         $pid = $_REQUEST['pid'];
+	     }
+	     else
+	     {
+	      echo json_encode($ret);   
+	      exit();
+	     }
+	     $list = array();
+	     if(isset($_SESSION['addcart']) )
+	     {
+	         
+	                if($pid != '')
+	                {
+	                    unset($_SESSION['addcart'][$pid]);
+	                         $ret = array(
+	                             
+	         'status'=> 1,
+	         'msg' => 'Product Deleted from cart successfully!'
+	         );
+	         echo json_encode($ret);
+	         exit();   
+	                }
+	             
+	     }
+	     	         echo json_encode($ret);
+	         exit();   
+	 }
 	 public function wishlist()
 	 {
 	     $ret = array(
@@ -1078,6 +1170,29 @@ if ($err) {
         	}
 	    }
 	}
+	public function checkout_gateway()
+	{
+		$ret = array(
+		'status'=>0,
+		'msg'=>'invalid request',
+		);
+		if(isset($_REQUEST['oid']) && isset($_REQUEST['gatway']))
+		{
+			    $this->load->model('Common_model');
+    	$this->Common_model->table = 'orders';
+    	$this->Common_model->key = 'id';
+    	$modal = $this->Common_model;
+		$modal->update($_REQUEST['oid'],array('pmthd'=>$_REQUEST['gatway']));
+		$ret = array(
+		'status'=>1,
+		'msg'=>'Process succfully redirecting ...',
+		'red'=>base_url('/index/checkout')."?tab=reciept&oid=".$_REQUEST['oid'],
+		);
+		
+		}
+		echo json_encode($ret);
+		exit();
+	}
 	public function vcheckout()
 	{
 	    if(!empty($_REQUEST['billing_email']))
@@ -1223,7 +1338,7 @@ if ($username == "" || $email == '' || $password == "") {
 						{
 							$responseData['msg'] = "Successfully Registered, Redirecting ----";
 							$responseData['status'] = "1";
-							$responseData['red'] = base_url('/index/page/checkout')."?tab=three";
+							$responseData['red'] = base_url('/index/checkout')."?tab=instruction";
 							
 						}
 					echo json_encode($responseData);
@@ -2626,7 +2741,7 @@ exit();
                 	    }
 						if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'checkout')
 						{
-							$url = base_url('/index/page/checkout')."?tab=three";
+							$url = base_url('/index/checkout')."?tab=instruction";
 						}
                 	    
                 	    
@@ -2648,6 +2763,50 @@ exit();
 		        );
 		}
 		echo json_encode($ret);
+		exit();
+	}
+	public function reset_password()
+	{
+	    if(!empty($_REQUEST['email_forgot']))
+		{
+		    $email = $_REQUEST['email_forgot'];
+		    $user = $this->db->where('user_email',$email)->get('wp_users')->row();
+		    
+		    if($user)
+            {
+             $UserID   = $user->ID;
+             $data['name'] = $user->user_nicename;
+             $data['pass'] = $npass = rand(1000000,100000);
+             $msg = $this->load->view('mail/reset', $data, true);
+             $up = array('user_pass'=>$npass);
+             $this->load->model('auth_model');
+             echo $ret = $this->auth_model->updateuserbyid($UserID, $up);
+        //      if($retU)
+        //      {
+        //          $this->session->userdata('checkMail',$email);
+        //          $this->template->mail($email,$msg, "Password Change");
+                 
+        //          $ret = array(
+    		  //      'status' => 1,
+    		  //      'msg' => 'Please check your email to reset password code',
+		      //  );
+        //      }
+            }else{
+                 $ret = array(
+    		        'status' => 0,
+    		        'msg' => 'Invalid Email Address',
+		        );
+            }
+		    
+		}
+		else
+		{
+		    $ret = array(
+		        'status' => 0,
+		        'msg' => 'Email fields required!',
+		        );
+		}
+// 		echo json_encode($ret);
 		exit();
 	}
 	public function social_login()

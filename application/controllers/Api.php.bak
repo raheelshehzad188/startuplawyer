@@ -1078,6 +1078,19 @@ if ($err) {
         	}
 	    }
 	}
+	public function checkout_gateway()
+	{
+		if(isset($_REQUEST['oid']) && isset($_REQUEST['gatway']))
+		{
+			    $this->load->model('Common_model');
+    	$this->Common_model->table = 'orders';
+    	$this->Common_model->key = 'id';
+    	$modal = $this->Common_model;
+		$modal->update($_REQUEST['oid'],array('pmthd'=>$_REQUEST['gatway']));
+		}
+		var_dump($_REQUEST);
+		die();
+	}
 	public function vcheckout()
 	{
 	    if(!empty($_REQUEST['billing_email']))
@@ -1223,7 +1236,7 @@ if ($username == "" || $email == '' || $password == "") {
 						{
 							$responseData['msg'] = "Successfully Registered, Redirecting ----";
 							$responseData['status'] = "1";
-							$responseData['red'] = base_url('/index/page/checkout')."?tab=three";
+							$responseData['red'] = base_url('/index/checkout')."?tab=instruction";
 							
 						}
 					echo json_encode($responseData);
@@ -2624,6 +2637,10 @@ exit();
                 	    $url = base_url('admin/admin');
                 	    
                 	    }
+						if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'checkout')
+						{
+							$url = base_url('/index/checkout')."?tab=instruction";
+						}
                 	    
                 	    
                 $ret = array(

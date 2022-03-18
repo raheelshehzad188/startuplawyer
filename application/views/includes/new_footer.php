@@ -446,17 +446,18 @@ Please register to be informed every time free resources are posted.</p>
 					<button  type="button" onclick="submit_form('login_form');" id="sbtn" class="btn_1 full-width mb_5">Log In</button>
 					Don’t have an account? <a href="<?= base_url('auth/register'); ?>">Sign up</a>
 				</div>
-				
-				</form>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+			</div>	
+		</form>
+		<form method="post" action="<?= base_url(); ?>api/reset_password" id="forget_form" class="d-none">
+			<div id="forget_div">
+				<div class="form-group">
+					<label>Please confirm login email below</label>
+					<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+					<i class="icon_mail_alt"></i>
 				</div>
+				<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+				<div class="text-center"><input type="button" onclick="forget_submit('forget_form');" value="Reset Password" class="btn_1"></div>
+				<div class="text-center" style="margin-top: 8px;"><input type="button" value="Back To Login" class="btn_1" id="login_btn"></div>
 			</div>
 		</form>
 		<!--form -->
@@ -542,7 +543,64 @@ function submit_form(form_id)
             }
         }
 }
-function ajax_url(url, type)
+
+
+function forget_submit(form_id)
+{
+        var vali =  validate_form(form_id);
+        if(vali > 0)
+        {
+            var mid = '#'+form_id;
+            var before_text = ''
+            if(form_id == 'login_form')
+            {
+                before_text = $(mid+' #sbtn').text();
+            }
+            else
+            {
+                before_text = $(mid+' button').text();
+            }
+            
+            if(form_id != ' ')
+            {
+                
+                  $.ajax({
+                    url: $(mid).attr('action'),
+                    method: $(mid).attr('method'),
+                    data: $(mid).serialize(),
+                    beforeSend: function() {
+                        if(form_id == 'login_form')
+            {
+                $(mid+' #sbtn').text('Loading ...')
+            }
+            else
+            {
+                $(mid+' button').text('Loading ...')
+            }
+                    },
+                    success: function(data) {
+            
+                      setTimeout(function(){ 
+                                      if(form_id == 'login_form')
+            {
+                $(mid+' #sbtn').text(before_text);
+            }
+            else
+            {
+                $(mid+' button').text(before_text);
+            }
+                        form_response(data,form_id);    
+                          
+                      }, 3000);
+                    },
+                    error: function() {
+                        
+                    }
+                });
+            }
+        }
+}
+function ajax_url(url, type,id = 0)
 {
         if(url != ' ')
         {
@@ -554,6 +612,19 @@ function ajax_url(url, type)
                 success: function(data) {
                     if(type == 'email_print')
                     {
+                    }
+                    else if(type == 'rcart')
+                    {
+                        var obj = JSON.parse(data);
+                        if(obj['status'])
+                        {
+                            swal("Good job!",obj['msg'], "success");
+                            location.reload();
+                        }
+                        else
+                        {
+                            swal("Sorry!", obj['msg'], "error");
+                        }
                     }
                     else if(type == 'wishlist')
                     {
@@ -567,6 +638,29 @@ function ajax_url(url, type)
                             swal("Sorry!", obj['msg'], "error");
                         }
                     }
+                    else if(type == 'uqty')
+                    {
+                        // alert(data);
+                        var obj = JSON.parse(data);
+                        var row = '#row_'+id;
+                        // console.log(obj);
+                        // alert(obj['item_tot']);
+                        if(obj['item_tot'])
+                        $(row+' #price').text('LKR '+obj['item_tot'])
+                        if(obj['tot'])
+                        $('#ctot').text('LKR '+obj['tot'])
+                        var obj = JSON.parse(data);
+                        if(obj['status'])
+                        {
+                            swal("Good job!",obj['msg'], "success");
+                        }
+                        else
+                        {
+                            swal("Sorry!", obj['msg'], "error");
+                        }
+                    }
+                    
+                    
                   setTimeout(function(){ 
                     modal_response(data);    
                       
@@ -862,6 +956,18 @@ var ASSET_URL = "<?= base_url('/assets/'); ?>";
     <script>
 	    $('#sign-in1').click(function(){
 	        $('#sign-in').click();
+	    });
+	    
+	    $('#forgot').click(function(){
+	        $('#forget_form').removeClass('d-none');
+	        $('#login_form').addClass('d-none');
+	        $('#sign-in-dialog h3').text('Forget Password');
+	    });
+	    
+	    $('#login_btn').click(function(){
+	        $('#forget_form').addClass('d-none');
+	        $('#login_form').removeClass('d-none');
+	        $('#sign-in-dialog h3').text('Sign In');
 	    });
 	</script>
     <script>

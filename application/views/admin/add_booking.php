@@ -216,7 +216,7 @@ $days[] = array(
                              foreach($edit['slot_st'] as $k=>$st)
                         {
                             
-                            if(!empty($st) && !empty($slot_du[$k]))
+                            if(!empty($st) && !empty($slot_du[$k]) && !empty($slot_sd[$k]))
                             {
                             if($k== 0)
                             {
