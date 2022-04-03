@@ -43,6 +43,20 @@ $terms = $product->getcat( $pro->catID);
 			);
 			$this->db->insert('orders',$in);
 			$oid = $this->db->insert_id();
+			foreach($cart as $k=> $v)
+			{
+			    $tot = ($pro->price * $v['qty']);
+			    $pro = $product->getproduct( $v['pid'] );
+			    $in = array(
+    			'oid' => $oid,
+    			'provider' => $pro->uid,
+    			'pid' => $v['pid'],
+    			'qty' => $v['qty'],
+    			'price' => $tot,
+    			'raw' => json_encode($v)
+    			);
+    			$this->db->insert('order_items',$in);
+			}
 			//orders
 		}
 		return $oid;
@@ -66,7 +80,7 @@ $terms = $product->getcat( $pro->catID);
 			$_SESSION['addcart'] = $cart;
 			//create order here
 			$data['order_id'] = $this->corder();
-			var_dump($data['order_id']);
+// 			var_dump($data['order_id']);
 			
 		}
 		$data['assets']= base_url('assets/books/');
@@ -757,12 +771,6 @@ $terms = $product->getcat( $pro->catID);
         $data['assets']= base_url('assets/books/');
         $this->template->front('addbook',$data);
     }
-	public function mail($page = '')
-	{
-		$this->load->view('mail/'.$page,array());
-
-
-	}
 	public function full($page = '')
 	{
 		$data= array();
@@ -810,6 +818,25 @@ $terms = $product->getcat( $pro->catID);
 		  //  exit();
 		}
 		$this->template->front($page,$data);
+
+
+	}
+    
+	public function mail($page = '')
+	{
+	    
+		$data= array();
+		$this->load->model('Common_model');
+	    $this->load->model('Product_model');
+	    $product = $this->Product_model;
+	    $modal = $this->Common_model;
+		$data['modal']= $modal;
+		$data['product']= $product;
+		$data['hclass']= 'header_in clearfix';
+		$data['assets']= base_url('assets/');
+		// die($data['assets']);
+		$this->load->library('template');
+		echo $this->template->mailt($page,$data);
 
 
 	}

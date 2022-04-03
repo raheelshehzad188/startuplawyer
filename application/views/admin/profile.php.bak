@@ -1,11 +1,7 @@
 <?php
 //
-$user = $_SESSION['knet_login'];
-if($user)
-{
-    $user = $product->getuser($user->ID);
-}
-$uimg = get_user_img($user->ID); 
+$user = $product->getuser($user->ID); 
+$uimg = $user->img;
 ?>
 <!-- account setting page start -->
                 <section id="page-account-settings">
@@ -39,12 +35,12 @@ $uimg = get_user_img($user->ID);
                                         Bank Details
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                               <!-- <li class="nav-item">
                                     <a class="nav-link d-flex py-75" id="account-pill-policy" data-toggle="pill" href="#account-vertical-policy" aria-expanded="false">
                                         <i class="feather icon-user mr-50 font-medium-3"></i>
                                         Service provider policy
                                     </a>
-                                </li>
+                                </li>-->
                                 <li class="nav-item">
                                     <a class="nav-link d-flex py-75" id="account-pill-social" data-toggle="pill" href="#account-vertical-social" aria-expanded="false">
                                         <i class="feather icon-camera mr-50 font-medium-3"></i>
@@ -72,10 +68,10 @@ $uimg = get_user_img($user->ID);
                                     <div class="card-body">
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
-                                                <form action="<?= base_url('provider/admin/profile'); ?>?general=1"  method="post" enctype="multipart/form-data" novalidate>
+                                                <form action="<?= base_url('admin/admin/profile'); ?>/<?= isset($user->ID)?$user->ID:''; ?>?general=1"  method="post" enctype="multipart/form-data" novalidate>
                                                 <div class="media">
                                                     <a href="javascript: void(0);">
-                                                        <img id="pimg" src="<?= $user->img; ?>" class="rounded mr-75" alt="profile image" height="64" width="64">
+                                                        <img id="prof_img" src="<?= $uimg; ?>" class="rounded mr-75" alt="profile image" height="64" width="64">
                                                     </a>
                                                     <div  class="media-body mt-75">
                                                         <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
@@ -104,6 +100,18 @@ $uimg = get_user_img($user->ID);
                                                 ?>
                                                 <hr>
                                                     <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label for="account-username">Banner image</label>
+                                                                    <input type="file" class="form-control" name="banner" id="account-username" placeholder="Username" value="" readonly = "true">
+                                                                    <img id="prof_img" src="<?= $user->banner; ?>" class="rounded mr-75" alt="profile Banner" height="64" width="64">
+                                                                    <p class="text-muted ml-75 mt-50"><small>Allowed JPG, GIF or PNG. Max
+                                                                Dimension should be  800 x450
+                                                                </small></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
@@ -145,7 +153,7 @@ $uimg = get_user_img($user->ID);
                                                 </form>
                                             </div>
                                             <div role="tabpanel" class="tab-pane" id="account-vertical-bank" aria-labelledby="account-pill-bank" aria-expanded="true">
-                                                <form action="<?= base_url('provider/admin/profile'); ?>?bank=1"  method="post" enctype="multipart/form-data" novalidate>
+                                                <form action="<?= base_url('admin/admin/profile'); ?>/<?= isset($user->ID)?$user->ID:''; ?>?bank=1"  method="post" enctype="multipart/form-data" novalidate>
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
@@ -188,9 +196,15 @@ $uimg = get_user_img($user->ID);
                                                 </form>
                                             </div>
                                             <div class="tab-pane fade " id="account-vertical-password" role="tabpanel" aria-labelledby="account-pill-password" aria-expanded="false">
-                                                <form action="<?= base_url('provider/admin/profile'); ?>?chpass=1"  method="post" enctype="multipart/form-data" novalidate>
+                                                <form action="<?= base_url('admin/admin/profile'); ?>/<?= isset($user->ID)?$user->ID:''; ?>?chpass=1"  method="post" enctype="multipart/form-data" novalidate>
                                                     <div class="row">
                                                         <div class="col-12">
+                                                            <div class="form-group">
+                                                                <div class="controls">
+                                                                    <label for="account-new-password">Current Password</label>
+                                                                    <input type="password" name="npass" id="account-new-password" class="form-control" placeholder="Current Password" required data-validation-required-message="The password field is required" minlength="6">
+                                                                </div>
+                                                            </div>
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label for="account-new-password">New Password</label>
@@ -216,7 +230,7 @@ $uimg = get_user_img($user->ID);
                                                 </form>
                                             </div>
                                             <div class="tab-pane fade" id="account-vertical-info" role="tabpanel" aria-labelledby="account-pill-info" aria-expanded="false">
-                                                <form action="<?= base_url('provider/admin/profile'); ?>?bio=1"  method="post" enctype="multipart/form-data" novalidate>
+                                                <form action="<?= base_url('admin/admin/profile'); ?>/<?= isset($user->ID)?$user->ID:''; ?>?bio=1"  method="post" enctype="multipart/form-data" novalidate>
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
@@ -224,6 +238,13 @@ $uimg = get_user_img($user->ID);
                                                                 <textarea class="form-control" name="description" id="accountTextarea" rows="3" placeholder="Your Bio data here..."><?=$product->getmeta('user',$user->ID,'description',true); ?></textarea>
                                                             </div>
                                                         </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="accountTextarea">Service provider policy</label>
+                                                                <textarea class="form-control" name="sp-policy" id="account-pill-policy" rows="3" placeholder="Service provider policy..."><?=$product->getmeta('user',$user->ID,'description',true); ?></textarea>
+                                                            </div>
+                                                        </div>
+                                                       
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="accountTextarea">Language</label>
@@ -234,22 +255,52 @@ $uimg = get_user_img($user->ID);
                                                                         $ucats = explode(',',$ucats);
                                                                         // print_r($ucats);
                                                                         
-                                                                         $all_categories = array();  /*wp_get_recent_posts(array(
-                                                                                "numberposts" => -1, // Number of recent posts thumbnails to display
-                                                                                "post_status" => 'publish', // Show only the published posts
-                                                                                "post_type"=>'search_language'
-                                                                            ));*/
+                                                                    $modal->table = 'wp_posts';
+                                                $modal->key = 'ID';
+                                                $recent_posts = $modal->get(array("post_type"=>'search_language'));
                                                                             
-                                                                            foreach($all_categories as $cat) : ?>
+                                                                            
+                                                                            foreach($recent_posts as $cat) { ?>
                                                                             <?php
                                                                             ?>
                                                                         <li style="display:block;"  ><label><input type="checkbox" name="lang[]" value="<?php echo $cat['ID']; ?>" <?= in_array($cat['ID'],$ucats)?"checked":""; ?> ><?php echo $cat['post_title'] ?></label></li>
-                                                                        <?php endforeach;?>
+                                                                        <?php }?>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <?php
+														if($admin)
+														{
+														?>
                                                         <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="accountTextarea">Allowed categories</label>
+                                                                <div class="wp-tab-panel">
+                                                                    <ul>
+                                                                        <?php
+                                                                        $ucats = $product->getmeta('user',$user->ID,'scats',true);
+                                                                        $ucats = explode(',',$ucats);
+                                                                        // print_r($ucats);
+                                                                        
+                                                                    $modal->table = 'category';
+                                                $modal->key = 'id';
+                                                $recent_posts = $modal->get(array("parent"=>'0'));
+                                                                            
+                                                                            
+                                                                            foreach($recent_posts as $cat) { ?>
+                                                                            <?php
+                                                                            ?>
+                                                                        <li style="display:block;"  ><label><input type="checkbox" name="scats[]" value="<?php echo $cat['ID']; ?>" <?= in_array($cat['id'],$ucats)?"checked":""; ?> ><?php echo $cat['name'] ?></label></li>
+                                                                        <?php }?>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php
+														}
+														?>
+														<div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="accountTextarea">Type</label>
                                                                 <div class="wp-tab-panel">
@@ -259,17 +310,15 @@ $uimg = get_user_img($user->ID);
                                                                         $ucats = explode(',',$ucats);
                                                                         // print_r($ucats);
                                                                         
-                                                                        $all_categories = array();  /*wp_get_recent_posts(array(
-                                                                        "numberposts" => -1, // Number of recent posts thumbnails to display
-                                                                        "post_status" => 'publish', // Show only the published posts
-                                                                        "post_type"=>'search_from'
-                                                                        ));*/
+                                                                    $modal->table = 'wp_posts';
+                                                $modal->key = 'ID';
+                                                $recent_posts = $modal->get(array("post_type"=>'search_from'));
 
-                                                                        foreach($all_categories as $cat) : ?>
+                                                                        foreach($recent_posts as $cat) { ?>
                                                                         <?php
                                                                         ?>
                                                                         <li style="display:block;"  ><label><input type="checkbox" name="type[]" value="<?php echo $cat['ID']; ?>" <?= in_array($cat['ID'],$ucats)?"checked":""; ?> ><?php echo $cat['post_title'] ?></label></li>
-                                                                        <?php endforeach;?>
+                                                                        <?php }?>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -282,16 +331,13 @@ $uimg = get_user_img($user->ID);
                                                                         <?php
                                                                         $ucats = $product->getmeta('user',$user->ID,'area',true);
                                                                         $ucats = explode(',',$ucats);
-                                                                                                // print_r($ucats);
-                                                                                                
-                                                                         $all_categories = array();
-                                                                         /*wp_get_recent_posts(array(
-                                                                            "numberposts" => -1, // Number of recent posts thumbnails to display
-                                                                            "post_status" => 'publish', // Show only the published posts
-                                                                            "post_type"=>'area'
-                                                                        ));*/
+                                                                        // print_r($ucats);
+                                                                        
+                                                                    $modal->table = 'wp_posts';
+                                                $modal->key = 'ID';
+                                                $recent_posts = $modal->get(array("post_type"=>'area'));
                                                                             
-                                                                            foreach($all_categories as $cat) : ?>
+                                                                            foreach($recent_posts as $cat) : ?>
                                                                             <?php
                                                                             ?>
                                                                         <li style="display:block;"  ><label><input type="checkbox" name="area[]" value="<?php echo $cat['ID']; ?>" <?= in_array($cat['ID'],$ucats)?"checked":""; ?> ><?php echo $cat['post_title'] ?></label></li>
@@ -309,13 +355,13 @@ $uimg = get_user_img($user->ID);
                                                 <select name="district" class="form-control" id="accountSelect">
                                                 <option >Selet District</option>
                                                 <?php
-                                                $all_categories = array(); /*wp_get_recent_posts(array(
-                                                "numberposts" => -1, // Number of recent posts thumbnails to display
-                                                "post_status" => 'publish', // Show only the published posts
-                                                "post_type"=>'distric'
-                                            ));*/
+                                                                        // print_r($ucats);
+                                                                        
+                                                                    $modal->table = 'wp_posts';
+                                                $modal->key = 'ID';
+                                                $recent_posts = $modal->get(array("post_type"=>'distric'));
     
-                                        foreach($all_categories as $cat) : ?>
+                                        foreach($recent_posts as $cat) : ?>
                                             <option value="<?= $cat['ID'] ?>" <?= (($cat['ID'] == $udis)?"selected":""); ?>><?= $cat['post_title']; ?></option>
                                             <?php endforeach;?>
                                             </select>
@@ -325,6 +371,7 @@ $uimg = get_user_img($user->ID);
                                                             <div class="form-group">
                                                                 <label for="accountSelect">Intro video Link</label>
                                                                 <input type="text"  name="intro_video" class="form-control" value="<?= $product->getmeta('user',$user->ID,'intro_video', true); ?>" />
+                                                                <span>Put only youtube video ID, Example: https://www.youtube.com/watch?v=HmZKgaHa3Fg in trhat ink HmZKgaHa3Fg is video id.</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
@@ -363,31 +410,30 @@ $uimg = get_user_img($user->ID);
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label for="musicselect2">Favourite Music</label>
-                                                                <select class="form-control" id="musicselect2" multiple="multiple">
-                                                                    <option value="Rock">Rock</option>
-                                                                    <option value="Jazz" selected>Jazz</option>
-                                                                    <option value="Disco">Disco</option>
-                                                                    <option value="Pop">Pop</option>
-                                                                    <option value="Techno">Techno</option>
-                                                                    <option value="Folk" selected>Folk</option>
-                                                                    <option value="Hip hop">Hip hop</option>
-                                                                </select>
+                                                                <label for="email">Email</label>
+                                                                <input type="email" class="form-control" value="<?= $product->getmeta('user',$user->ID,'billing_email', true); ?>" name="billing_email" id="email" placeholder="Your email">
+
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label for="moviesselect2">Favourite movies</label>
-                                                                <select class="form-control" id="moviesselect2" multiple="multiple">
-                                                                    <option value="The Dark Knight" selected>The Dark Knight
-                                                                    </option>
-                                                                    <option value="Harry Potter" selected>Harry Potter</option>
-                                                                    <option value="Airplane!">Airplane!</option>
-                                                                    <option value="Perl Harbour">Perl Harbour</option>
-                                                                    <option value="Spider Man">Spider Man</option>
-                                                                    <option value="Iron Man" selected>Iron Man</option>
-                                                                    <option value="Avatar">Avatar</option>
-                                                                </select>
+                                                                <label for="address">Address</label>
+                                                                <input type="text" class="form-control" id="address" placeholder="Your address">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="working-hours">Working hours</label>
+                                                                
+                                                                <input type="text" class="form-control" id="working-hours" placeholder="Working hours">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="price-rangr">Price Range</label>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
@@ -547,22 +593,21 @@ $uimg = get_user_img($user->ID);
                     </div>
                 </section>
                 <!-- account setting page end -->
-                <script type="text/javascript">
-                    
-                    function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      $('#pimg').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(input.files[0]);
-  } else {
-    alert('select a file to see preview');
-    $('#pimg').attr('src', '');
-  }
-}
+                    <script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-$("#account-upload").change(function() {
-  readURL(this);
-});
-                </script>
+            reader.onload = function (e) {
+                $('#prof_img').attr('src', e.target.result);
+                // document.getElementById('prof_img').style.backgroundImage="url( " + e.target.result + ")";
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#account-upload").change(function(){
+        readURL(this);
+    });
+    </script>

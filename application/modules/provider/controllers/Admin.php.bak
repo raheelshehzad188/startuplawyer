@@ -8,17 +8,17 @@ class Admin extends CI_Controller {
 
 		 function __construct() {
         parent::__construct();
-        if(!isset($_SESSION['knet_login']))
+        if(!$_SESSION['knet_login'])
 		{
-			redirect_to(base_url('/login'));
-			exit();
+			redirect('/panel/login');
 		}
         $data= array();
 		$this->load->library('template');
-		$this->template->folder = 'admin';
+		$this->template->folder = 'provider';
     }
     public function index()
 	{
+	    
 		$data= array();
 		$data['assets'] = $assets= base_url('/assets').'/';
 // 		die($assets);
@@ -68,7 +68,7 @@ class Admin extends CI_Controller {
 		}
 		else
 		{   
-			$this->template->admin('dash1',$data);
+			$this->template->admin('index',$data);
 		}
 
 	}
@@ -97,6 +97,7 @@ class Admin extends CI_Controller {
 	else
 	{
 		unset($_SESSION['knet_login']);
+		wp_logout();
 
 		wp_redirect(panel_url());
 
@@ -285,8 +286,9 @@ header('Access-Control-Allow-Origin: *');
 	{
 
 unset($_SESSION['knet_login']);
+		wp_logout();
 
-		redirect_to(base_url());
+		wp_redirect(panel_url());
 
 		exit();
 
@@ -348,8 +350,8 @@ unset($_SESSION['knet_login']);
 		$days = get_post_meta($pid,'days',true);
 		$date = date('Y-m-d');
 		$date = date('Y-m-d', strtotime($date. ' + '.$days.' days'));
-		$product->updatemeta('user',$uid,'pack_expire_date',$date);
-		$product->updatemeta('user',$uid,'ppack',$pid);
+		update_user_meta($uid,'pack_expire_date',$date);
+		update_user_meta($uid,'ppack',$pid);
 		global $wpdb;
     $sql = "SELECT *  FROM `wp_terms` join `wp_term_taxonomy` on wp_terms.term_id = wp_term_taxonomy.term_id AND wp_term_taxonomy.taxonomy = 'product_cat' AND wp_term_taxonomy.parent = '0'";
     $myrows = $wpdb->get_results($sql);
@@ -362,7 +364,7 @@ unset($_SESSION['knet_login']);
         if($postno)
         {
             $cts[] = $cat->term_id;
-            $product->updatemeta('user',$uid,$cat->slug,$postno);
+            update_user_meta($uid,$cat->slug,$postno);
         }
 
     }
@@ -375,7 +377,7 @@ unset($_SESSION['knet_login']);
                               $ucats[] = $cid;
                           }
                         }
-                        $product->updatemeta('user',$uid,'scats',implode(",",$ucats));
+                        update_user_meta($uid,'scats',implode(",",$ucats));
 		//change end
 		$tid= add_transections(get_the_title($pid).' Subscription',$pid,$uid,0,get_post_meta($pid, '_price',true));
 		$data = array();
@@ -400,57 +402,6 @@ $js = array();
 
 		$this->template->admin('addsubscription',$data);
 	}
-	/*---nimratraing--*/
-	
-    public function service_provider()
-	{
-		$data= array();
-		$data['url']= base_url(); 
-		$data['assets'] = $assets= base_url('/assets').'/';
-		$breed = array();
-		$breed['Home'] = Base_url('/admin/admin');
-		$page = 'Subscriptions';
-		$breed[$page] = ' ';
-		$css = array();
-		$css[] = $assets.'/app-assets/css/pages/app-ecommerce-shop.css';
-		$js = array();
-		$js[] = $assets.'/app-assets/js/scripts/ui/data-list-view.js';
-
-
-		$data['page']= $page;
-		$data['css']= $css;
-		$data['js']= $js;
-		$data['breed']= $breed;
-		$data['data']= array();
-		$this->load->model('Common_model');
-		$this->Common_model->table = 'wp_posts';
-		$this->Common_model->key = 'ID';
-		$modal = $this->Common_model;
-		$products = $modal->get(array('post_type'=>'subscriptions','post_status'   => 'publish'));
-
-		$products = wc_get_products(array(
-    'category' => array('memberships'),
-));
-// 		$data['data']= $products;
-    
-	$breed = array();
-		$breed['Home'] = Base_url('/admin/admin');
-		$page = 'PayHere Response';
-		$breed[$page] = ' ';
-		$css = array();
-		$css[] = $assets.'/app-assets/css/pages/app-ecommerce-shop.css';
-		$js = array();
-		$js[] = $assets.'/app-assets/js/scripts/ui/data-list-view.js';
-
-
-		$data['page']= $page;
-		$data['title']= $page;
-		$data['css']= $css;
-		$data['js']= $js;
-		$data['breed']= $breed;
-		$this->template->admin('service_provider',$data);
-        
-}//function end
 	public function set_avatar_url($avatar_url, $user_id) {
         global $wpdb;
         $upload_dir = wp_upload_dir();
@@ -481,7 +432,7 @@ $attach_id = wp_insert_attachment( $attachment, $file );
 require_once( ABSPATH . 'wp-admin/includes/image.php' );
         $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
         wp_update_attachment_metadata($attach_id, $attach_data);
-        $product->updatemeta('user',$user_id, 'wp_user_avatar', $attach_id);
+        update_user_meta($user_id, 'wp_user_avatar', $attach_id);
     }
     public function profile( $user_id = 0)
 	{
@@ -500,22 +451,6 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 			if(isset($_REQUEST['general']))
 			{
 				
-				if(isset($_FILES['banner']['name']) && !empty($_FILES['banner']['name']))
-		        {
-	        	$imgData = $this->template->upload('banner');
-	        	if($imgData['localPath'])
-	        	{
-	        	    $this->load->model('Common_model');
-		$this->Common_model->table = 'wp_users';
-		$this->Common_model->key = 'ID';
-		$modal = $this->Common_model;
-	        		$mediaID = $modal->addMedia($imgData);
-	        		if($mediaID)
-	        		{
-	        		$r = $product->updatemeta('user',$user->ID,'banner',$mediaID);
-	        		}
-	        	}
-	        }
 				if(isset($_FILES['pimg']['name']) && !empty($_FILES['pimg']['name']))
 		        {
 	        	$imgData = $this->template->upload('pimg');
@@ -573,13 +508,7 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 				{
 				    $uid = $user->ID;
 				    $product->updatemeta('user',$uid,'lang',implode(",",$_POST['lang']));
-				}
-				if(isset($_POST['scats']) && isset($user->ID))
-				{
-				    $uid = $user->ID;
-				    $product->updatemeta('user',$uid,'scats',implode(",",$_POST['scats']));
-				}
-				if(isset($_POST['type']) && isset($user->ID))
+				}if(isset($_POST['type']) && isset($user->ID))
 				{
 				    $uid = $user->ID;
 				    $product->updatemeta('user',$uid,'type',implode(",",$_POST['type']));
@@ -602,16 +531,6 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 				{
 				    $uid = $user->ID;
 				    $product->updatemeta('user',$uid,'first_free_cons',$_POST['first_free_cons']);
-				}
-				if(isset($_POST['whaatsapp']))
-				{
-				    $uid = $user->ID;
-				    $product->updatemeta('user',$uid,'whaatsapp',$_POST['whaatsapp']);
-				}
-				if(isset($_POST['billing_email']))
-				{
-				    $uid = $user->ID;
-				    $product->updatemeta('user',$uid,'billing_email',$_POST['billing_email']);
 				}
 				if(isset($_POST['billing_phone']))
 				{
@@ -662,9 +581,9 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 		}
 
 		$data= array();
-		$data['admin'] = 1;
 		$data['url']= base_url(); 
 		$data['assets'] = $assets= base_url('/assets').'/';
+		$data['admin'] = 1;
 		$breed = array();
 		$breed['Home'] = Base_url('/admin/admin');
 		$page = 'Profile Setup';
@@ -704,7 +623,6 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 		$page = 'Chat';
 		$breed[$page] = ' ';
 		$css = array();
-		$data['user']= $user;
 		$css[] = $assets.'/app-assets/css/core/menu/menu-types/vertical-menu.css';
 		$css[] = $assets.'/app-assets/css/core/colors/palette-gradient.css';
 		$css[] = $assets.'/app-assets/css/plugins/file-uploaders/dropzone.css';
@@ -815,8 +733,11 @@ $js[] = $assets.'/app-assets/js/scripts/ui/data-list-view.js';
 		
 		if($user_id == $post_author)
 		{
+		    
+		    $post = get_post($value['order_id']);
 		    //check order exist
-		    if($post && $post->post_status != 'trash')
+		    
+		    if($post && $post->post_status != 'wc-on-hold' && $post->post_status != 'trash')
 		    {
 			$payments[] = array(
 				'order_id'=> $value['order_id'],
@@ -942,53 +863,7 @@ $js[] = $assets.'/app-assets/js/scripts/ui/data-list-view.js';
 	public function page($page = "")
 	{
 		$data= array();
-		$tit = array(
-		        'service_provider' => 'Service Provider',
-		        'order' => 'Orders',
-		        'pay' => 'Payments',
-		        'earning_statement' => 'Earning Statement',
-		        'payment_details' => 'Payment Details',
-		    );
-		    $perm = $page;
-		    if($page == 'pay' || $page == 'earning_statement' || $page == 'payment_details')
-		    {
-		        $perm = 'payment';
-		    }
-		if(!check_permission($perm))
-		{
-		    redirect(base_url('index/page/not_auth'));
-		}
-		$data['assets']=$assets = base_url('assets/admin/');
-		$data['page']= $tit[$page];
-		$data['footer']= 'cfooter';
-		$data['css']= array();
-		$breed = array();
-		$breed['Home'] = Base_url('/admin/admin');
-		$page1 = $tit[$page];
-		$breed[$page1] = ' ';
-		$css = array();
-		$css[] = $assets.'/app-assets/css/pages/data-list-view.css';
-		$css[] = $assets.'/app-assets/css/core/menu/menu-types/vertical-menu.css';
-		$css[] = $assets.'/app-assets/css/core/colors/palette-gradient.css';
-		$css[] = $assets.'/app-assets/css/plugins/file-uploaders/dropzone.css';
-		$css[] = $assets.'/app-assets/css/pages/data-list-view.css';
-		$js = array();
-		$js[] = $assets.'app-assets/vendors/js/tables/datatable/datatables.min.js';
-		$js[] = $assets.'/app-assets/js/scripts/ui/data-list-view.js';
-		if($page == 'order')
-		{
-		    $this->load->model('Common_model');
-		$this->Common_model->table = 'wp_posts';
-		$this->Common_model->key = 'ID';
-		$modal = $this->Common_model;
-		$data['data'] = $orders = $modal->get(array('post_type' => 'shop_order'));
-		}
-
-
-		$data['page']= $page1;
-		$data['css']= $css;
-		$data['js']= $js;
-		$data['breed']= $breed;
+		$data['assets']= base_url('assets/admin/');
 		$this->template->admin($page,$data);
 	}
 	public function userStatus($uid, $status)

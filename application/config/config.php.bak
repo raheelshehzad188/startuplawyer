@@ -28,7 +28,6 @@ date_default_timezone_set('Asia/Kuwait');
 // $config['base_url'] = 'https://knet.gingergulf.com';
 $root = "https://".$_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-die($root);
 $config['base_url']    = "$root";
 
 //HMVC

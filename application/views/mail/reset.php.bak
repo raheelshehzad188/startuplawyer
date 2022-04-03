@@ -23,9 +23,9 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <p>Hi, <?= $name ?></p>
-                                    <p>We’ve received your request to reset your account password. To do so, please enter visite this link and reset your account password.
+                                    <p>We’ve received your request to reset your account password. To do so, please enter the following code on the password reset page.
                                     </p>
-                                    <p><a href="<?= base_url() ?>/reset/<?= $reset ?>">Click Here To Reset Your Account</a></p>
+                                    <p><h3><?= $pass ?></h3></p>
 
                                     <p>Thanks,</p>
 

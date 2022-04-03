@@ -173,16 +173,16 @@ class Products extends CI_Controller {
 	        	    $cslug = $this->create_slug($_REQUEST['title']);
 	        	    $arr['slug'] = $cslug;
 	        	    $id = $this->modal->add($arr);
-	        	    if($_REQUEST['products'] && $id)
+					echo $str = $this->db->last_query();
+					die();
+	        	    if($_REQUEST['products'])
 	        	    {
 	        	    $product->setextra($id,'product_to_packages',$_REQUEST['products']);
 	        	    }
-					if($id)
-					{
 	        	    $product->setextra($id,'product_to_tags',$_REQUEST['tags']);
 	        	    $product->setextra($id,'product_to_locations',$_REQUEST['locations']);
 	        	    $product->setextra($id,'product_to_languages',$_REQUEST['lanaguage']);
-					}
+					
 
 	                $this->session->set_flashdata('success', $this->single.' add successfully!');
 	        }

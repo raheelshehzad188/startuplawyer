@@ -23,8 +23,8 @@ class Template {
               ),
               'from' => 
               array (
-                'email' => 'info@startuplawyer.lk',
-                'name' => 'startuplawyer',
+                'email' => 'info@channelsmedia.com',
+                'name' => 'channelsmedia',
               ),
               'content' => 
               array (
@@ -48,7 +48,7 @@ class Template {
               CURLOPT_CUSTOMREQUEST => "POST",
               CURLOPT_POSTFIELDS => json_encode($data),
               CURLOPT_HTTPHEADER => array(
-                "authorization: Bearer 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",
+                "authorization: Bearer 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",
                 "cache-control: no-cache",
                 "content-type: application/json",
                 "postman-token: 500e002d-9ecb-48a8-eb26-9e81cba79900"
@@ -56,8 +56,6 @@ class Template {
             ));
             
             $response = curl_exec($curl);
-            var_dump($response);
-            die();
             $err = curl_error($curl);
             
             curl_close($curl);
@@ -68,7 +66,7 @@ class Template {
               return $response;
             }
     }
-	public function download_img($img)
+        public function download_img($img)
         {
                 $currentDir = getcwd();
     $uploadDirectory = "uploads/";
@@ -194,7 +192,6 @@ fclose($fp);
           }
           return $text;
         }
-
         public function admin($view , $data)
         {
             
@@ -267,6 +264,8 @@ fclose($fp);
         }
         public function front($view , $data)
         {
+        public function mailt($view , $data)
+        {
                 $CI =& get_instance();
 
                 // die("OK");
@@ -290,26 +289,5 @@ fclose($fp);
                 else{
                   echo $ret = $CI->load->view('includes/new_footer.php',$data,TRUE);
                 }
-        }
-
-        public function mailt($view , $data)
-        {
-                $CI =& get_instance();
-
-                // die("OK");
-                if(!isset($data['title']))
-                {
-                        $data['title'] = 'StartupLawyer';
-                }
-                $CI->load->model('Product_model');
-                $CI->load->model('Common_model');
-            // $this->Common_model->table = 'music';
-                $data['ci'] = $CI;
-                $data['modal'] = $CI->Common_model;
-                $data['product'] = $CI->Product_model;
-                $h = $CI->load->view('includes/email-header',$data,true);
-                $b =  $CI->load->view('mail/'.$view,$data,true);
-                  $f = $CI->load->view('includes/email-footer',$data,TRUE);
-				  return $h.$b.$f;
         }
 }

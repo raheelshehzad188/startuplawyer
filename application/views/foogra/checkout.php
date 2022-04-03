@@ -677,8 +677,27 @@
     .chk{
         margin-right:15px;
     }
+    .lower>.row{
+        padding:0 100px;
+    }
+     .lower>.other{
+        padding:0 300px;
+    }
+     .lower>.other img{
+       width:60px;
+        height:40px;
+    }
+    .lower h4{
+    border-radius: 25px;
+    background-color: chartreuse;
+    padding: 4px 11px;
+    width: 35px;
+    height: 35px;
+    }
    @media only screen and (max-width: 600px) {/*---------for mob-------*/
-
+    .lower>.row{
+        padding:0 10px;
+    }
    .cctabs, .dsn{
 
    padding:0;
@@ -841,7 +860,6 @@
                <?php
 
                   if(isset($tabs[$tab]))
-
                   {
 
                    $sing = $tabs[$tab];
@@ -856,6 +874,12 @@
 
                    }
 
+                  }
+                  elseif($tab == 'invoice')
+                  {
+                      $v = 'foogra/checkout/invoice';
+
+                  	$this->load->view($v);
                   }
 
                   ?>
@@ -874,7 +898,6 @@
 <script>
 function process_pyment()
 {
-	alert($('input[name ="pmthd"]:checked').val());
 	if($('input[name ="pmthd"]:checked').val() == 'payhere')
 	{
 		$('#payhere-payment').click();
@@ -923,7 +946,7 @@ ajax_url('<?=base_url("/api/checkout_gateway"); ?>?oid='+orderId+"&gatway=payher
     // Put the payment variables here
     var payment = {
         "sandbox": true,
-        "merchant_id": "1215144",    // Replace your Merchant ID
+        "merchant_id": get_option('payhere_merchant_id','payhere_merchant_id'),    // Replace your Merchant ID
         "return_url": "<?= base_url('index/payhere/resturn'); ?>",     // Important
         "cancel_url": "<?= base_url('index/payhere/cencel'); ?>",     // Important
         "notify_url": "<?= base_url('index/payhere/notify'); ?>",

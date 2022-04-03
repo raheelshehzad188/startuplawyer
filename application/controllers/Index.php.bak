@@ -47,6 +47,11 @@ $terms = $product->getcat( $pro->catID);
 		}
 		return $oid;
 	}
+    public function payhere($status)
+	{
+		echo $status;
+		var_dump($_REQUEST);
+	}
     public function checkout()
 	{
 		$data= array();
@@ -805,6 +810,25 @@ $terms = $product->getcat( $pro->catID);
 		  //  exit();
 		}
 		$this->template->front($page,$data);
+
+
+	}
+    
+	public function mail($page = '')
+	{
+	    
+		$data= array();
+		$this->load->model('Common_model');
+	    $this->load->model('Product_model');
+	    $product = $this->Product_model;
+	    $modal = $this->Common_model;
+		$data['modal']= $modal;
+		$data['product']= $product;
+		$data['hclass']= 'header_in clearfix';
+		$data['assets']= base_url('assets/');
+		// die($data['assets']);
+		$this->load->library('template');
+		echo $this->template->mailt($page,$data);
 
 
 	}

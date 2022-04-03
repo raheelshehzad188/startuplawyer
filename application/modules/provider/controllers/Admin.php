@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
         parent::__construct();
         if(!$_SESSION['knet_login'])
 		{
-			redirect('/panel/login');
+			redirect('/');
 		}
         $data= array();
 		$this->load->library('template');
@@ -314,14 +314,10 @@ unset($_SESSION['knet_login']);
 		$data['breed']= $breed;
 		$data['data']= array();
 		$this->load->model('Common_model');
-		$this->Common_model->table = 'wp_posts';
-		$this->Common_model->key = 'ID';
+		$this->Common_model->table = 'products';
+		$this->Common_model->key = 'id';
 		$modal = $this->Common_model;
-		$products = $modal->get(array('post_type'=>'subscriptions','post_status'   => 'publish'));
-
-		$products = wc_get_products(array(
-    'category' => array('memberships'),
-));
+		$products = $modal->get(array('catID'=>'9','status'   => '0'));
 		$data['data']= $products;
 		if(isset($_REQUEST["type"])  && isset($_REQUEST['user_id']) && isset($_REQUEST['order_id']))
 {
@@ -453,6 +449,7 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 				
 				if(isset($_FILES['pimg']['name']) && !empty($_FILES['pimg']['name']))
 		        {
+		            
 	        	$imgData = $this->template->upload('pimg');
 	        	if($imgData['localPath'])
 	        	{
@@ -583,6 +580,7 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 		$data= array();
 		$data['url']= base_url(); 
 		$data['assets'] = $assets= base_url('/assets').'/';
+		
 		$breed = array();
 		$breed['Home'] = Base_url('/admin/admin');
 		$page = 'Profile Setup';

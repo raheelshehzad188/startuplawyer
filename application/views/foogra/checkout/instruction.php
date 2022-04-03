@@ -59,10 +59,29 @@ $terms = $product->getcat( $pro->catID);
                     </form>
                     <div class="lower">
                      <h5>WHAT OTHERS HAVE TO SAY?</h5>
-                     <span><img src="" alt="img" ></span>
-                     <span>NAME-</span>
+                     <div class="other">
+                         <div>
+                     <span><img src="https://startuplawyer.lk/main/assets/front/img/pro.jpg" alt="img" ></span>
+                     <span><b>Anna North-</b></span>
                      <span>CITY</span>
-                        <P>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</P>
+                        <P>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</P>
+                        </div><div>
+                     <span><img src="https://startuplawyer.lk/main/assets/front/img/pro.jpg" alt="img" ></span>
+                     <span><b>Anna North-</b></span>
+                     <span>CITY</span>
+                        <P>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</P>
+                        </div><div>
+                     <span><img src="https://startuplawyer.lk/main/assets/front/img/pro.jpg" alt="img" ></span>
+                     <span><b>Anna North-</b></span>
+                     <span>CITY</span>
+                        <P>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</P>
+                        </div><div>
+                     <span><img src="https://startuplawyer.lk/main/assets/front/img/pro.jpg" alt="img" ></span>
+                     <span><b>Anna North-</b></span>
+                     <span>CITY</span>
+                        <P>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</P>
+                        </div>
+                        </div>
                    </div>
                </div>
                

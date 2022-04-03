@@ -8,5 +8,5 @@ $this->load->view('foogra/home');
 ?>	
 	 
 <?php
-$this->load->view('includes/new_footer');
+$this->load->view('includes/new_footer1');
 ?>

@@ -192,6 +192,7 @@ fclose($fp);
           }
           return $text;
         }
+
         public function admin($view , $data)
         {
             
@@ -287,5 +288,26 @@ fclose($fp);
                 else{
                   echo $ret = $CI->load->view('includes/new_footer.php',$data,TRUE);
                 }
+        }
+
+        public function mailt($view , $data)
+        {
+                $CI =& get_instance();
+
+                // die("OK");
+                if(!isset($data['title']))
+                {
+                        $data['title'] = 'StartupLawyer';
+                }
+                $CI->load->model('Product_model');
+                $CI->load->model('Common_model');
+            // $this->Common_model->table = 'music';
+                $data['ci'] = $CI;
+                $data['modal'] = $CI->Common_model;
+                $data['product'] = $CI->Product_model;
+                $h = $CI->load->view('includes/email-header',$data,true);
+                $b =  $CI->load->view('mail/'.$view,$data,true);
+                  $f = $CI->load->view('includes/email-footer',$data,TRUE);
+				  return $h.$b.$f;
         }
 }

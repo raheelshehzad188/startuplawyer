@@ -577,7 +577,7 @@ require_once( ABSPATH . 'wp-admin/includes/image.php' );
 				if(isset($_POST['scats']) && isset($user->ID))
 				{
 				    $uid = $user->ID;
-				    $product->updatemeta('user',$uid,'scats',implode(",",$_POST['scats']));
+				    $product->updatemeta('user',$uid,'lang',implode(",",$_POST['scats']));
 				}
 				if(isset($_POST['type']) && isset($user->ID))
 				{

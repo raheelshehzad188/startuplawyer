@@ -48,9 +48,7 @@
                                 <br>
                                 
                             </div>
-                            <div><br><select name="File" id="File">
-                              <option value="File">Choose File</option>
-                            </select></div>
+                            <div><br><input type="file" placeholder="Choose File"></div>
                      </div>
                      <div class="col-3 text-right">
                         <div class="h1 m-0"><i class="fa fa-money"></i></div>
@@ -79,20 +77,23 @@
                                 <div class="row">
                                     <div class="col-lg-2 col-md-4 col-sm-12"><h4>1</h4></div>
                                     <div class="col-lg-10 col-md-4 col-sm-12">
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "</p></div>
+                                    <P>NO EXTRA CHARGES</P>
+                                    <p>Absolutely no extra charges from the Client for using the Startup Lawyer platform. We only earn from Service Providers(who pay us fixed monthy subscription listing on a commission for sales on courses and webinars). </p></div>
                                 </div>
                             </div> 
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-4 col-sm-12"><h4>2</h4></div>
                                     <div class="col-lg-10 col-md-4 col-sm-12">
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "</p></div>
+                                        <p>REQUEST FOR REFUND WITH FREE DISPUTE RESOLUTION</p>
+                                    <p>If the Service Provider does not meet delivery timelines, you can request for partial or full refund, which will be granted upon hearings through a Startup Lawyer Mediator. This processis absolutely free.</p></div>
                                 </div>
                             </div> <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-4 col-sm-12"><h4>3</h4></div>
                                     <div class="col-lg-10 col-md-4 col-sm-12">
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "</p></div>
+                                    <p>GREATER BARGAINING POWER FOR THE CLIENT</p>
+                                    <p>50% of your payment is held by Startup Lawyer until Startup Lawyercompletes his task. As per our Service Level Agreements with your Service Providers, is mandatorily required to provide you with weekly updates, and use courteous "Client Counseling Technique" in all his dealing with you.</p></div>
                                 </div>
                             </div>
                         </div>

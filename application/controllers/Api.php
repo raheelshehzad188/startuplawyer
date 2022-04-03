@@ -1333,7 +1333,13 @@ if ($username == "" || $email == '' || $password == "") {
 
                         $responseData['message'] = "Successfully Registered!";
                         $responseData['error'] = "0";
-                        $responseData['user'] = $user;
+                        $responseData['user'] = $product->getuser($user_id);
+                        $_SESSION['knet_login'] = $product->getuser($user_id);
+                        $role = array(
+	    'customer' => 1
+	    );
+	    $role = serialize($role);
+	    $role = $product->updatemeta('user',$user_id,'wp_capabilities',$role);
 						if($type == 'checkout')
 						{
 							$responseData['msg'] = "Successfully Registered, Redirecting ----";
@@ -2777,20 +2783,27 @@ exit();
              $UserID   = $user->ID;
              $data['name'] = $user->user_nicename;
              $data['pass'] = $npass = rand(1000000,100000);
-             $msg = $this->load->view('mail/reset', $data, true);
-             $up = array('user_pass'=>$npass);
-             $this->load->model('auth_model');
-             echo $ret = $this->auth_model->updateuserbyid($UserID, $up);
-        //      if($retU)
-        //      {
-        //          $this->session->userdata('checkMail',$email);
-        //          $this->template->mail($email,$msg, "Password Change");
+             
+			 //die($msg);
+			 $npass = md5($npass);
+			 $msg = $this->template->mailt('fpass', array('key'=>$npass,'uid'=>$UserID), true);
+             $up = array('user_activation_key'=>$npass);
+             $this->load->model('Common_model');
+			 $this->Common_model->table = 'wp_users';
+			 $this->Common_model->key = 'ID';
+             $retU = $this->Common_model->update($UserID, $up);
+              if($retU)
+              {
+                  $this->session->userdata('checkMail',$email);
+                  $r = $this->template->mail($email,$msg, "Password Change");
+				  var_dump($r);
+				  die("PL");
                  
-        //          $ret = array(
-    		  //      'status' => 1,
-    		  //      'msg' => 'Please check your email to reset password code',
-		      //  );
-        //      }
+                  $ret = array(
+    		        'status' => 1,
+    		        'msg' => 'Please check your email to reset password',
+		        );
+              }
             }else{
                  $ret = array(
     		        'status' => 0,

@@ -25,7 +25,7 @@ class Option extends CI_Controller {
     private $single= 'Website Option';
     private $multi= 'Website Options';
     private $add= 'addoption';
-    private $all= 'table';
+    private $all= 'alloption';
     private $url= '';
     private $modal= '';
 	/**
@@ -370,8 +370,6 @@ class Option extends CI_Controller {
         	    else
         	    {
         	    $pid = $this->modal->add($in);
-        	    var_dump($pid);
-        	    die();
         	    }
 	        
 	        if(!$id)

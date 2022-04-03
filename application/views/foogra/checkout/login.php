@@ -31,7 +31,23 @@
                                             <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Designation: *" name="designation"></div>
                                          </div>
                                          <div class="col-md-8">
-                                            <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="District: *" name="district"></div>
+                                            <div class="form-group">
+                                                <?php
+                                                $modal->table='wp_posts';
+                                                $modal->key='ID';
+                                                $posts = $modal->get(array('post_type'=> 'distric'));
+                                                ?>
+                                                <select class="form-control form-control-simple" placeholder="District: *" name="district">
+                                                    <option value="0" >Select District</option>
+                                                    <?php
+                                                    foreach($posts as $k => $v)
+                                                    {
+                                                        ?>
+                                                                    <option value="<?= $v['ID'] ?>" ><?= $v['post_title'] ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select></div>
                                          </div>
                                          <div class="col-md-6">
                                             <div class="form-group"><input type="text" value="" class="form-control form-control-simple" placeholder="Email: *" name="email"></div>
@@ -88,20 +104,20 @@
                                 <div class="row">
                                     <div class="col-lg-2 col-md-4 col-sm-12"><h4>1</h4></div>
                                     <div class="col-lg-10 col-md-4 col-sm-12">
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "</p></div>
+                                    <p>Access to Members Only FREE RESOURCES</p></div>
                                 </div>
                             </div> 
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-4 col-sm-12"><h4>2</h4></div>
                                     <div class="col-lg-10 col-md-4 col-sm-12">
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "</p></div>
+                                    <p>Eligble to apply for Startup Lawyer Credit card with upto 200k limit </p></div>
                                 </div>
                             </div> <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-4 col-sm-12"><h4>3</h4></div>
                                     <div class="col-lg-10 col-md-4 col-sm-12">
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "</p></div>
+                                    <p>First to be informed of free products and services offered on first come first serve basis</p></div>
                                 </div>
                             </div>
                         </div>

@@ -509,6 +509,7 @@ function submit_form(form_id)
                 
                   $.ajax({
                     url: $(mid).attr('action'),
+					crossDomain: true,
                     method: $(mid).attr('method'),
                     data: $(mid).serialize(),
                     beforeSend: function() {
@@ -807,6 +808,27 @@ $('.woocommerce-MyAccount-navigation-link--bill').addClass('is-active');
 	    ?>
 	</script>
 <script>
+$(window).scroll(function () { 
+    //You've scrolled this much:
+    console.log($(window).scrollTop()+'-'+window.innerWidth);
+       if($(window).scrollTop() > 45)
+       {
+        //   alert($(window).scrollTop());
+        // $('.cartImg').hide();
+           $('.cartImg').attr('src','https://startuplawyer.lk/main/assets/front/img/cart.png');
+             $('#dashboardImg').attr('src','https://startuplawyer.lk/main/assets/front/img/dashboard.png');
+             $('.heartImg').attr('src','https://startuplawyer.lk/main/assets/front/img/hblack.png');
+             $("header").addClass("fix-header");
+       }
+       else
+       {
+           $("header").removeClass("fix-header");
+        $('.cartImg').attr('src','<?= get_option( 'cart-normal', get_assets_url().'/'.'img/cart2.png' ) ?>');   
+        
+        $('#dashboardImg').attr('src','<?= get_option( 'dashboard', get_assets_url().'/'.'img/dashboard2.png' ) ?>');
+        $('.heartImg').attr('src','<?= get_option( 'heart-black', get_assets_url().'/'.'img/wheart.png' ) ?>');  
+       }
+});
 </script>
 <script>
 	window.fbAsyncInit = function() {
@@ -950,6 +972,26 @@ var ASSET_URL = "<?= base_url('/assets/'); ?>";
 	    });
 	</script>
     <script>
+$(window).scroll(function () { 
+    //You've scrolled this much:
+       if($(window).scrollTop() > 45)
+       {
+        //   alert($(window).scrollTop());
+        // $('.cartImg').hide();
+           $('.cartImg').attr('src','https://startuplawyer.lk/main/assets/front/img/cart.png');
+             $('#dashboardImg').attr('src','https://startuplawyer.lk/main/assets/front/img/dashboard.png');
+             $('.heartImg').attr('src','https://startuplawyer.lk/main/assets/front/img/hblack.png');
+             $("header").addClass("fix-header");
+       }
+       else
+       {
+           $("header").removeClass("fix-header");
+        $('.cartImg').attr('src','<?= get_option( 'cart-normal', get_assets_url().'/'.'img/cart2.png' ) ?>');   
+        
+        $('#dashboardImg').attr('src','<?= get_option( 'dashboard', get_assets_url().'/'.'img/dashboard2.png' ) ?>');
+        $('.heartImg').attr('src','<?= get_option( 'heart-black', get_assets_url().'/'.'img/wheart.png' ) ?>');  
+       }
+});
 </script>
 <script>
 	    $('#sign-in1').click(function(){

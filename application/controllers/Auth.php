@@ -99,12 +99,17 @@ class Auth extends CI_Controller {
                     );
                     $this->db->insert('wp_users', $user_data );           
                         $user_id = $this->db->insert_id();
+                        $r = $this->input->post('role');
                         $this->load->model('Product_model');
         $product = $this->Product_model;
         	if($user_id)
         	{
                 $token = md5($user_id);
                 $product->updatemeta('user',$user_id, 'plain_pass',$this->input->post('upass'));
+                                $role = array();
+                        $role[$r] = 1;
+	    $role = serialize($role);
+	    $role = $product->updatemeta('user',$user_id,'wp_capabilities',$role);
                 $product->updatemeta('user',$user_id, 'varified',0);
                 $em = array(
                     "name"=> $arr['first_name'].' '.$arr['last_name'],

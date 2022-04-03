@@ -648,6 +648,8 @@ public function bubble_sort($arr) {
                     }
                     $row->area = $ar;
                     $row->full_name = $this->getmeta('user',$mediaID,'first_name',true).' '.$this->getmeta('user',$mediaID,'last_name',true);
+                    $row->first_name = $this->getmeta('user',$mediaID,'first_name',true);
+                    $row->last_name = $this->getmeta('user',$mediaID,'last_name',true);
                     $row->bio = $this->getmeta('user',$mediaID,'description',true);
                     $row->intro_video = $this->getmeta('user',$mediaID,'intro_video',true);
                     $row->whaatsapp = $this->getmeta('user',$mediaID,'whaatsapp',true);
